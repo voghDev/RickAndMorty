@@ -7,6 +7,8 @@ ext {
     def retrofitVersion = '2.8.1'
     def okhttpVersion = '3.14.7'
     def gsonVersion = '2.8.6'
+    def junitVersion = '5.6.2'
+    def mockkVersion = '1.9.3'
 
     configPlugins = [
             androidPlugin: "com.android.tools.build:gradle:${androidPluginVersion}",
@@ -25,10 +27,10 @@ ext {
     ]
 
     retrofit = [
-            runtime: "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            gson   : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            mock   : "com.squareup.retrofit2:retrofit-mock:${retrofitVersion}",
-            scalars: "com.squareup.retrofit2:converter-scalars:${retrofitVersion}"
+            runtime : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            gson    : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            mock    : "com.squareup.retrofit2:retrofit-mock:${retrofitVersion}",
+            scalars : "com.squareup.retrofit2:converter-scalars:${retrofitVersion}"
     ]
 
     okhttp = [
@@ -39,5 +41,13 @@ ext {
 
     gson = [
             gson: "com.google.code.gson:gson:${gsonVersion}"
+    ]
+
+    junit = [
+            junit: "org.junit.jupiter:junit-jupiter:${junitVersion}"
+    ]
+
+    mockk = [
+            mockk: "io.mockk:mockk:${mockkVersion}"
     ]
 }
