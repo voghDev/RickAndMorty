@@ -3,6 +3,8 @@ apply plugin: 'kotlin-kapt'
 
 dependencies {
     implementation(kotlin.stdlib)
+
+    implementation project(":common")
 }
 
 sourceCompatibility = "7"
