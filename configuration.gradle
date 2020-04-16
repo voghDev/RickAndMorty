@@ -1,0 +1,13 @@
+ext {
+    def minSDKVersion = 17
+    def targetSDKVersion = 29
+    def buildToolsVersion = "29.0.2"
+    def compileSDKVersion = 29
+
+    androidConfiguration = [
+            minSDK    : minSDKVersion,
+            targetSDK : targetSDKVersion,
+            buildTools: buildToolsVersion,
+            compileSDK: compileSDKVersion
+    ]
+}
