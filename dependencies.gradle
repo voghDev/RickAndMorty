@@ -3,6 +3,11 @@ ext {
     def mavenPluginVersion = '2.0'
     def kotlinVersion = '1.3.61'
 
+    def coroutinesVersion = '1.3.5'
+    def retrofitVersion = '2.8.1'
+    def okhttpVersion = '3.14.7'
+    def gsonVersion = '2.8.6'
+
     configPlugins = [
             androidPlugin: "com.android.tools.build:gradle:${androidPluginVersion}",
             mavenPlugin  : "com.github.dcendents:android-maven-gradle-plugin:${mavenPluginVersion}",
@@ -11,5 +16,28 @@ ext {
 
     kotlin = [
             stdlib: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}"
+    ]
+
+    coroutines = [
+            core   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutinesVersion}",
+            android: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}",
+            test   : "org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutinesVersion}"
+    ]
+
+    retrofit = [
+            runtime: "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            gson   : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            mock   : "com.squareup.retrofit2:retrofit-mock:${retrofitVersion}",
+            scalars: "com.squareup.retrofit2:converter-scalars:${retrofitVersion}"
+    ]
+
+    okhttp = [
+            okhttp       : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
+            interceptor  : "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}",
+            mockWebServer: "com.squareup.okhttp3:mockwebserver:${okhttpVersion}"
+    ]
+
+    gson = [
+            gson: "com.google.code.gson:gson:${gsonVersion}"
     ]
 }
