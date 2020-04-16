@@ -1,2 +1,6 @@
 rootProject.name='RickAndMorty'
-include ':app'
+include ':presentation'
+include ':remote'
+include ':data'
+include ':domain'
+include ':cache'
