@@ -5,6 +5,7 @@ dependencies {
     implementation(kotlin.stdlib)
 
     implementation project(":data")
+    implementation project(":common")
 }
 
 
