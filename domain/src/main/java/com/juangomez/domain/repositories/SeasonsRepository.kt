@@ -3,8 +3,9 @@ package com.juangomez.domain.repositories
 import com.juangomez.common.Either
 import com.juangomez.common.Failure
 import com.juangomez.domain.models.Episodes
+import com.juangomez.domain.models.Seasons
 
-interface EpisodeRepository {
+interface SeasonsRepository {
 
-    suspend fun getEpisodes(): Either<Failure, Episodes>
+    suspend fun getSeasons(): Either<Failure, Seasons>
 }
