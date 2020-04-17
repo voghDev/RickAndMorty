@@ -9,11 +9,11 @@ import kotlinx.coroutines.supervisorScope
 
 abstract class BaseUseCase<out Type, in Params> where Type : Any {
 
-    abstract suspend fun run(params: Params? = null): Either<Failure, Type>
+    abstract suspend fun run(params: Params): Either<Failure, Type>
 
     open operator fun invoke(
         scope: CoroutineScope,
-        params: Params? = null,
+        params: Params,
         onResult: (Either<Failure, Type>) -> Unit = {}
     ) {
         scope.launch {

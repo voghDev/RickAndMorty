@@ -5,6 +5,7 @@ import com.juangomez.common.Failure
 import com.juangomez.data.providers.remote.EpisodesRemoteProvider
 import com.juangomez.domain.models.Episode
 import com.juangomez.remote.models.RemoteEpisode
+import com.juangomez.remote.models.toEpisode
 import com.juangomez.remote.models.toEpisodes
 import com.juangomez.remote.services.APIService
 
@@ -27,4 +28,7 @@ class EpisodesRemoteProviderImpl(private val api: APIService<EpisodesAPIService>
 
         return Either.Right(episodes.toEpisodes())
     }
+
+    override suspend fun getEpisode(id: Int): Either<Failure, Episode> =
+        api.execute { api.service.getEpisode(id).toEpisode() }
 }

@@ -8,6 +8,6 @@ import com.juangomez.domain.repositories.SeasonRepository
 class GetSeasonsUseCase(private val seasonRepository: SeasonRepository) :
     BaseUseCase<List<Season>, BaseUseCase.None>() {
 
-    override suspend fun run(params: None?): Either<Failure, List<Season>> =
+    override suspend fun run(params: None): Either<Failure, List<Season>> =
         seasonRepository.getSeasons()
 }
