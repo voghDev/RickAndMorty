@@ -7,7 +7,8 @@ data class Episode(
     val name: String,
     val airDate: Date,
     val season: Int,
-    val number: Int
+    val number: Int,
+    val characterIds: List<Int>
 )
 
 fun List<Episode>.groupBySeasons() = groupBy { it.season }
