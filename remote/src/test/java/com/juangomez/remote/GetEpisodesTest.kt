@@ -1,6 +1,7 @@
 package com.juangomez.remote
 
 import com.juangomez.common.Either
+import com.juangomez.common.Failure
 import com.juangomez.data.providers.remote.EpisodesRemoteProvider
 import com.juangomez.remote.models.toEpisodes
 import com.juangomez.remote.responses.GetEpisodesResponse
@@ -76,6 +77,22 @@ class GetEpisodesTest : BaseRemoteTest() {
             val response = episodesRemoteProvider.getEpisodes()
             assertEquals(
                 Either.Right(finalResponse),
+                response
+            )
+        }
+    }
+
+    @Test
+    fun `should get a failure response with server error code`() {
+        mockWebServer.enqueue(
+            MockResponse()
+                .setResponseCode(Status.INTERNAL_SERVER_ERROR.code)
+        )
+
+        runBlocking {
+            val response = episodesRemoteProvider.getEpisodes()
+            assertEquals(
+                Either.Left(Failure.ServerError),
                 response
             )
         }
