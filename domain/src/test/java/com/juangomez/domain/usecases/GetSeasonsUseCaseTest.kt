@@ -1,9 +1,8 @@
 package com.juangomez.domain.usecases
 
 import com.juangomez.common.Either
-import com.juangomez.domain.models.Episodes
-import com.juangomez.domain.models.Seasons
-import com.juangomez.domain.repositories.SeasonsRepository
+import com.juangomez.domain.models.Season
+import com.juangomez.domain.repositories.SeasonRepository
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -18,18 +17,18 @@ class GetSeasonsUseCaseTest {
     private lateinit var getSeasonsUseCase: GetSeasonsUseCase
 
     @MockK
-    private lateinit var seasonsRepository: SeasonsRepository
+    private lateinit var seasonRepository: SeasonRepository
 
     @BeforeEach
     fun setup() = MockKAnnotations.init(this)
 
     @Test
     fun `should call to seasons repository when executes use case`() {
-        val seasons = mockk<Seasons>()
-        getSeasonsUseCase = GetSeasonsUseCase(seasonsRepository)
+        val seasons = mockk<List<Season>>()
+        getSeasonsUseCase = GetSeasonsUseCase(seasonRepository)
 
-        coEvery { seasonsRepository.getSeasons() } returns Either.Right(seasons)
+        coEvery { seasonRepository.getSeasons() } returns Either.Right(seasons)
         runBlocking { getSeasonsUseCase.invoke(this) }
-        coVerify(exactly = 1) { seasonsRepository.getSeasons() }
+        coVerify(exactly = 1) { seasonRepository.getSeasons() }
     }
 }

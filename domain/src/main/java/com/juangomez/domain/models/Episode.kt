@@ -10,3 +10,6 @@ data class Episode(
     val number: Int,
     val character: List<Character>
 )
+
+fun List<Episode>.groupBySeasons() = groupBy { it.season }
+    .map { Season(it.key, it.value) }

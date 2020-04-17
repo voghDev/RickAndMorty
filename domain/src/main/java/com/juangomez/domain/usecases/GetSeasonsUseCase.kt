@@ -2,13 +2,12 @@ package com.juangomez.domain.usecases
 
 import com.juangomez.common.Either
 import com.juangomez.common.Failure
-import com.juangomez.domain.models.Episodes
-import com.juangomez.domain.models.Seasons
-import com.juangomez.domain.repositories.SeasonsRepository
+import com.juangomez.domain.models.Season
+import com.juangomez.domain.repositories.SeasonRepository
 
-class GetSeasonsUseCase(private val seasonsRepository: SeasonsRepository) :
-    BaseUseCase<Seasons, BaseUseCase.None>() {
+class GetSeasonsUseCase(private val seasonRepository: SeasonRepository) :
+    BaseUseCase<List<Season>, BaseUseCase.None>() {
 
-    override suspend fun run(params: None?): Either<Failure, Seasons> =
-        seasonsRepository.getSeasons()
+    override suspend fun run(params: None?): Either<Failure, List<Season>> =
+        seasonRepository.getSeasons()
 }
