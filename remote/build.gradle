@@ -10,7 +10,15 @@ dependencies {
             okhttp.interceptor
     )
 
+    testImplementation(
+            junit.junit,
+            okhttp.mockWebServer,
+            mockk.mockk,
+            coroutines.test
+    )
+
     implementation project(":data")
+    implementation project(":domain")
     implementation project(":common")
 }
 

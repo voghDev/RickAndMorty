@@ -7,6 +7,12 @@ dependencies {
             coroutines.core
     )
 
+    testImplementation(
+            junit.junit,
+            mockk.mockk,
+            coroutines.test
+    )
+
     implementation project(":common")
 }
 
