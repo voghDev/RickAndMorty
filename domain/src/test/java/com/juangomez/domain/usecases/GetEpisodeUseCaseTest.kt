@@ -2,7 +2,6 @@ package com.juangomez.domain.usecases
 
 import com.juangomez.common.Either
 import com.juangomez.domain.models.Episode
-import com.juangomez.domain.models.Season
 import com.juangomez.domain.models.groupBySeasons
 import com.juangomez.domain.repositories.EpisodeRepository
 import io.mockk.MockKAnnotations
@@ -14,9 +13,9 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class GetSeasonsUseCaseTest {
+class GetEpisodeUseCaseTest {
 
-    private lateinit var getSeasonsUseCase: GetSeasonsUseCase
+    private lateinit var getEpisodeUseCase: GetEpisodeUseCase
 
     @MockK
     private lateinit var episodeRepository: EpisodeRepository
@@ -26,12 +25,12 @@ class GetSeasonsUseCaseTest {
 
     @Test
     fun `should call to episode repository when executes use case`() {
-        val episodes = mockk<List<Episode>>(relaxed = true)
-        getSeasonsUseCase = GetSeasonsUseCase(episodeRepository)
+        val episodeId = 1
+        val episode = mockk<Episode>()
+        getEpisodeUseCase = GetEpisodeUseCase(episodeRepository)
 
-        coEvery { episodeRepository.getEpisodes() } returns Either.Right(episodes)
-        runBlocking { getSeasonsUseCase.invoke(this, BaseUseCase.None()) }
-        coVerify(exactly = 1) { episodeRepository.getEpisodes() }
-        coVerify(exactly = 1) { episodes.groupBySeasons() }
+        coEvery { episodeRepository.getEpisode(episodeId) } returns Either.Right(episode)
+        runBlocking { getEpisodeUseCase.invoke(this, GetEpisodeUseCase.Params(episodeId)) }
+        coVerify(exactly = 1) { episodeRepository.getEpisode(episodeId) }
     }
 }

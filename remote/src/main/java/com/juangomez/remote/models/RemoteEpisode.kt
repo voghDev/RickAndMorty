@@ -33,13 +33,13 @@ data class RemoteEpisode(
     fun getCharacterIds() = characters.map { it.substringAfter(CHARACTER_DELIMITER).toInt() }
 }
 
-fun List<RemoteEpisode>.toEpisodes() = map {
-    Episode(
-        it.id,
-        it.name,
-        it.airDateStringToDate(),
-        it.getSeasonNumber(),
-        it.getEpisodeNumber(),
-        it.getCharacterIds()
-    )
-}
+fun RemoteEpisode.toEpisode() = Episode(
+    id,
+    name,
+    airDateStringToDate(),
+    getSeasonNumber(),
+    getEpisodeNumber(),
+    getCharacterIds()
+)
+
+fun List<RemoteEpisode>.toEpisodes() = map { it.toEpisode() }
