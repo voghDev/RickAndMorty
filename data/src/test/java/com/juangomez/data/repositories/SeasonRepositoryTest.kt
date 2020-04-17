@@ -32,14 +32,12 @@ class SeasonRepositoryTest {
 
     @Test
     fun `should call to remote and cache providers when get episodes and get a successful response`() {
-        val episodes = mockk<List<Episode>>()
-        val seasons = mockk<List<Season>>()
+        val episodes = mockk<List<Episode>>(relaxed = true)
 
         seasonRepository = SeasonRepositoryImpl(episodesRemoteProvider, cacheProvider)
 
         coEvery { episodesRemoteProvider.getEpisodes() } returns Either.Right(episodes)
         coEvery { cacheProvider.setEpisodes(episodes) } returns Unit
-        coEvery { episodes.groupBySeasons() } returns seasons
         runBlocking { seasonRepository.getSeasons() }
         coVerify(exactly = 1) { episodesRemoteProvider.getEpisodes() }
         coVerify(exactly = 1) { cacheProvider.setEpisodes(episodes) }
