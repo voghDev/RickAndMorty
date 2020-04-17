@@ -6,5 +6,5 @@ import com.juangomez.domain.models.Episode
 
 interface EpisodesRemoteProvider {
 
-    fun getEpisodes(): Either<Failure, List<Episode>>
+    suspend fun getEpisodes(): Either<Failure, List<Episode>>
 }

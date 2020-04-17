@@ -1,4 +1,4 @@
-package com.juangomez.remote
+package com.juangomez.remote.services
 
 import com.juangomez.common.Either
 import com.juangomez.common.Failure
@@ -13,8 +13,7 @@ open class APIService<T> constructor(
     serviceClass: Class<T>,
     private val baseURL: String,
     private val converterFactory: Converter.Factory,
-    private val interceptors: Array<Interceptor>,
-    private val networkInterceptors: Array<Interceptor>
+    private val interceptors: Array<Interceptor>
 ) {
     var service: T
 
@@ -26,7 +25,6 @@ open class APIService<T> constructor(
         val client = OkHttpClient.Builder()
 
         interceptors.map { client.addInterceptor(it) }
-        networkInterceptors.map { client.addNetworkInterceptor(it) }
 
         return Retrofit.Builder()
             .baseUrl(baseURL)
