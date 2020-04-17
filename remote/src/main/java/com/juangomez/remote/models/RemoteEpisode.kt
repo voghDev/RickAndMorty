@@ -19,6 +19,7 @@ data class RemoteEpisode(
         private const val AIR_DATE_FORMAT = "MMMM d, yyyy"
         private const val SEASON_DELIMITER = "S"
         private const val EPISODE_DELIMITER = "E"
+        private const val CHARACTER_DELIMITER = "/character/"
     }
 
     fun airDateStringToDate(): Date =
@@ -28,6 +29,8 @@ data class RemoteEpisode(
         episode.substringAfter(SEASON_DELIMITER).substringBefore(EPISODE_DELIMITER).toInt()
 
     fun getEpisodeNumber() = episode.substringAfter(EPISODE_DELIMITER).toInt()
+
+    fun getCharacterIds() = characters.map { it.substringAfter(CHARACTER_DELIMITER).toInt() }
 }
 
 fun List<RemoteEpisode>.toEpisodes() = map {
@@ -36,6 +39,7 @@ fun List<RemoteEpisode>.toEpisodes() = map {
         it.name,
         it.airDateStringToDate(),
         it.getSeasonNumber(),
-        it.getEpisodeNumber()
+        it.getEpisodeNumber(),
+        it.getCharacterIds()
     )
 }
