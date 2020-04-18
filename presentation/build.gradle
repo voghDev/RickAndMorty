@@ -26,7 +26,19 @@ android {
 }
 
 dependencies {
-    implementation(kotlin.stdlib)
+    implementation(
+            kotlin.stdlib,
+            coroutines.core,
+            coroutines.android,
+            timber.timber,
+            support.appCompat,
+            support.constraintlayout,
+            support.recyclerview,
+            retrofit.runtime,
+            koin.viewModel,
+            koin.core,
+            koin.android
+    )
 
     implementation project(":common")
     implementation project(":domain")
