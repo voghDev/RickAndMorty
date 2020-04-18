@@ -4,7 +4,7 @@ import com.juangomez.domain.models.Episode
 
 interface EpisodeCacheProvider {
 
-    fun getEpisodes(): List<Episode>?
+    fun getEpisodes(): List<Episode>
 
     fun setEpisodes(episodes: List<Episode>)
 

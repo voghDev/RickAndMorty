@@ -2,14 +2,12 @@ package com.juangomez.remote
 
 import com.juangomez.common.Either
 import com.juangomez.common.Failure
-import com.juangomez.data.providers.remote.EpisodesRemoteProvider
+import com.juangomez.data.providers.remote.EpisodeRemoteProvider
 import com.juangomez.remote.models.RemoteEpisode
 import com.juangomez.remote.models.toEpisode
-import com.juangomez.remote.models.toEpisodes
-import com.juangomez.remote.responses.GetEpisodesResponse
 import com.juangomez.remote.services.APIService
-import com.juangomez.remote.services.episodes.EpisodesAPIService
-import com.juangomez.remote.services.episodes.EpisodesRemoteProviderImpl
+import com.juangomez.remote.services.episodes.EpisodeAPIService
+import com.juangomez.remote.services.episodes.EpisodeRemoteProviderImpl
 import com.juangomez.remote.util.JSONFile
 import com.juangomez.remote.util.pojo
 import com.juangomez.remote.util.string
@@ -20,13 +18,13 @@ import org.junit.Test
 
 class GetEpisodeTest : BaseRemoteTest() {
 
-    private lateinit var episodesRemoteProvider: EpisodesRemoteProvider
+    private lateinit var episodeRemoteProvider: EpisodeRemoteProvider
 
     override fun setup() {
         super.setup()
-        episodesRemoteProvider = EpisodesRemoteProviderImpl(
+        episodeRemoteProvider = EpisodeRemoteProviderImpl(
             APIService(
-                EpisodesAPIService::class.java,
+                EpisodeAPIService::class.java,
                 BASE_URL,
                 provideGsonConverterFactory(),
                 provideInterceptors()
@@ -47,7 +45,7 @@ class GetEpisodeTest : BaseRemoteTest() {
         )
 
         runBlocking {
-            val response = episodesRemoteProvider.getEpisode(episodeId)
+            val response = episodeRemoteProvider.getEpisodeById(episodeId)
             assertEquals(
                 Either.Right(pojoResponse.toEpisode()),
                 response
@@ -65,7 +63,7 @@ class GetEpisodeTest : BaseRemoteTest() {
         )
 
         runBlocking {
-            val response = episodesRemoteProvider.getEpisode(episodeId)
+            val response = episodeRemoteProvider.getEpisodeById(episodeId)
             assertEquals(
                 Either.Left(Failure.ServerError),
                 response
