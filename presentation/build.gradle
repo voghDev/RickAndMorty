@@ -14,6 +14,8 @@ android {
         versionCode getVersionCodeFromProperties()
         versionName getVersionNameFromProperties()
 
+        buildConfigField "String", "BASE_URL", '"https://rickandmortyapi.com/api"'
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -26,7 +28,20 @@ android {
 }
 
 dependencies {
-    implementation(kotlin.stdlib)
+    implementation(
+            kotlin.stdlib,
+            coroutines.core,
+            coroutines.android,
+            timber.timber,
+            support.appCompat,
+            support.constraintlayout,
+            support.recyclerview,
+            retrofit.gson,
+            okhttp.interceptor,
+            koin.viewModel,
+            koin.core,
+            koin.android
+    )
 
     implementation project(":common")
     implementation project(":domain")
