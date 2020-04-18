@@ -8,7 +8,7 @@ interface EpisodeCacheProvider {
 
     fun setEpisodes(episodes: List<Episode>)
 
-    fun getEpisode(id: Int): Episode?
+    fun getEpisodeById(id: Int): Episode?
 
     fun setEpisode(episode: Episode)
 }

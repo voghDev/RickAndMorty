@@ -20,7 +20,7 @@ class EpisodeRepositoryImpl(
         }
 
     override suspend fun getEpisode(id: Int): Either<Failure, Episode> {
-        val cachedEpisode = episodeCacheProvider.getEpisode(id)
+        val cachedEpisode = episodeCacheProvider.getEpisodeById(id)
         return if (cachedEpisode != null) {
             Either.Right(cachedEpisode)
         } else {

@@ -60,9 +60,9 @@ class EpisodeRepositoryTest {
 
         episodeRepository = EpisodeRepositoryImpl(episodeRemoteProvider, episodeCacheProvider)
 
-        coEvery { episodeCacheProvider.getEpisode(episodeId) } returns episode
+        coEvery { episodeCacheProvider.getEpisodeById(episodeId) } returns episode
         runBlocking { episodeRepository.getEpisode(episodeId) }
-        coVerify(exactly = 1) { episodeCacheProvider.getEpisode(episodeId) }
+        coVerify(exactly = 1) { episodeCacheProvider.getEpisodeById(episodeId) }
         coVerify(exactly = 0) { episodeRemoteProvider.getEpisodeById(episodeId) }
         coVerify(exactly = 0) { episodeCacheProvider.setEpisode(episode) }
     }
@@ -74,11 +74,11 @@ class EpisodeRepositoryTest {
 
         episodeRepository = EpisodeRepositoryImpl(episodeRemoteProvider, episodeCacheProvider)
 
-        coEvery { episodeCacheProvider.getEpisode(episodeId) } returns null
+        coEvery { episodeCacheProvider.getEpisodeById(episodeId) } returns null
         coEvery { episodeRemoteProvider.getEpisodeById(episodeId) } returns Either.Right(episode)
         coEvery { episodeCacheProvider.setEpisode(episode) } returns Unit
         runBlocking { episodeRepository.getEpisode(episodeId) }
-        coVerify(exactly = 1) { episodeCacheProvider.getEpisode(episodeId) }
+        coVerify(exactly = 1) { episodeCacheProvider.getEpisodeById(episodeId) }
         coVerify(exactly = 1) { episodeRemoteProvider.getEpisodeById(episodeId) }
         coVerify(exactly = 1) { episodeCacheProvider.setEpisode(episode) }
     }
@@ -90,11 +90,11 @@ class EpisodeRepositoryTest {
 
         episodeRepository = EpisodeRepositoryImpl(episodeRemoteProvider, episodeCacheProvider)
 
-        coEvery { episodeCacheProvider.getEpisode(episodeId) } returns null
+        coEvery { episodeCacheProvider.getEpisodeById(episodeId) } returns null
         coEvery { episodeRemoteProvider.getEpisodeById(episodeId) } returns Either.Left(Failure.ServerError)
         coEvery { episodeCacheProvider.setEpisode(episode) } returns Unit
         runBlocking { episodeRepository.getEpisode(episodeId) }
-        coVerify(exactly = 1) { episodeCacheProvider.getEpisode(episodeId) }
+        coVerify(exactly = 1) { episodeCacheProvider.getEpisodeById(episodeId) }
         coVerify(exactly = 1) { episodeRemoteProvider.getEpisodeById(episodeId) }
         coVerify(exactly = 0) { episodeCacheProvider.setEpisode(episode) }
     }

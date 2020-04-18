@@ -2,10 +2,6 @@ package com.juangomez.cache
 
 import com.juangomez.data.providers.cache.EpisodeCacheProvider
 import com.juangomez.domain.models.Episode
-import io.mockk.MockKAnnotations
-import io.mockk.every
-import io.mockk.impl.annotations.MockK
-import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -31,7 +27,7 @@ class EpisodeCacheProviderTest {
     fun `should get a episode by id`() {
         val episodeToFind = episodes.last()
 
-        assertEquals(episodeToFind, episodeCacheProvider.getEpisode(episodeToFind.id))
+        assertEquals(episodeToFind, episodeCacheProvider.getEpisodeById(episodeToFind.id))
     }
 
     @Test
