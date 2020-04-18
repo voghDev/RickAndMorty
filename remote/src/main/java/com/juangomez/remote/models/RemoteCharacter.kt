@@ -19,7 +19,7 @@ data class RemoteCharacter(
 ) {
 
    companion object {
-        private const val EPISODE_DELIMITER = "/character/"
+        private const val EPISODE_DELIMITER = "/episode/"
     }
 
     fun getEpisodeIds() = episodes.map { it.substringAfter(EPISODE_DELIMITER).toInt() }
