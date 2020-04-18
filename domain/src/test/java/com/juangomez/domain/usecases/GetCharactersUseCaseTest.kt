@@ -12,9 +12,9 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class GetCharacterUseCaseTest {
+class GetCharactersUseCaseTest {
 
-    private lateinit var getCharacterUseCase: GetCharacterUseCase
+    private lateinit var getCharactersUseCase: GetCharactersUseCase
 
     @MockK
     private lateinit var characterRepository: CharacterRepository
@@ -26,10 +26,10 @@ class GetCharacterUseCaseTest {
     fun `should call to character repository when executes use case`() {
         val characterIds = listOf(1, 183)
         val characters = mockk<List<Character>>()
-        getCharacterUseCase = GetCharacterUseCase(characterRepository)
+        getCharactersUseCase = GetCharactersUseCase(characterRepository)
 
         coEvery { characterRepository.getCharactersById(characterIds) } returns Either.Right(characters)
-        runBlocking { getCharacterUseCase.invoke(this, GetCharacterUseCase.Params(characterIds)) }
+        runBlocking { getCharactersUseCase.invoke(this, GetCharactersUseCase.Params(characterIds)) }
         coVerify(exactly = 1) { characterRepository.getCharactersById(characterIds) }
     }
 }
