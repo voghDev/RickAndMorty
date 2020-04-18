@@ -2,15 +2,15 @@ package com.juangomez.remote.services.episodes
 
 import com.juangomez.common.Either
 import com.juangomez.common.Failure
-import com.juangomez.data.providers.remote.EpisodesRemoteProvider
+import com.juangomez.data.providers.remote.EpisodeRemoteProvider
 import com.juangomez.domain.models.Episode
 import com.juangomez.remote.models.RemoteEpisode
 import com.juangomez.remote.models.toEpisode
 import com.juangomez.remote.models.toEpisodes
 import com.juangomez.remote.services.APIService
 
-class EpisodesRemoteProviderImpl(private val api: APIService<EpisodesAPIService>) :
-    EpisodesRemoteProvider {
+class EpisodeRemoteProviderImpl(private val api: APIService<EpisodeAPIService>) :
+    EpisodeRemoteProvider {
 
     override suspend fun getEpisodes(): Either<Failure, List<Episode>> {
         var page: Int? = 1
@@ -29,6 +29,6 @@ class EpisodesRemoteProviderImpl(private val api: APIService<EpisodesAPIService>
         return Either.Right(episodes.toEpisodes())
     }
 
-    override suspend fun getEpisode(id: Int): Either<Failure, Episode> =
-        api.execute { api.service.getEpisode(id).toEpisode() }
+    override suspend fun getEpisodeById(id: Int): Either<Failure, Episode> =
+        api.execute { api.service.getEpisodeById(id).toEpisode() }
 }

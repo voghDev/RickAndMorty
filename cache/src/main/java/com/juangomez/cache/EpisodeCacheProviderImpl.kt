@@ -13,10 +13,10 @@ class EpisodeCacheProviderImpl : EpisodeCacheProvider {
         this.episodes = episodes.toMutableList()
     }
 
-    override fun getEpisode(id: Int) = episodes.find { episode -> episode.id == id }
+    override fun getEpisodeById(id: Int) = episodes.find { episode -> episode.id == id }
 
     override fun setEpisode(episode: Episode) {
-        if(getEpisode(episode.id) == null) episodes.add(episode)
+        if(getEpisodeById(episode.id) == null) episodes.add(episode)
     }
 
 }

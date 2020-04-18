@@ -4,9 +4,9 @@ import com.juangomez.common.Either
 import com.juangomez.common.Failure
 import com.juangomez.domain.models.Episode
 
-interface EpisodesRemoteProvider {
+interface EpisodeRemoteProvider {
 
     suspend fun getEpisodes(): Either<Failure, List<Episode>>
 
-    suspend fun getEpisode(id: Int): Either<Failure, Episode>
+    suspend fun getEpisodeById(id: Int): Either<Failure, Episode>
 }

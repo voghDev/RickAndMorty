@@ -2,29 +2,32 @@ package com.juangomez.remote
 
 import com.juangomez.common.Either
 import com.juangomez.common.Failure
-import com.juangomez.data.providers.remote.EpisodeRemoteProvider
-import com.juangomez.remote.models.RemoteEpisode
-import com.juangomez.remote.models.toEpisode
+import com.juangomez.data.providers.remote.CharacterRemoteProvider
+import com.juangomez.remote.models.RemoteCharacter
+import com.juangomez.remote.models.toCharacter
+import com.juangomez.remote.models.toCharacters
 import com.juangomez.remote.services.APIService
-import com.juangomez.remote.services.episodes.EpisodeAPIService
-import com.juangomez.remote.services.episodes.EpisodeRemoteProviderImpl
+import com.juangomez.remote.services.characters.CharacterAPIService
+import com.juangomez.remote.services.characters.CharacterRemoteProviderImpl
 import com.juangomez.remote.util.JSONFile
 import com.juangomez.remote.util.pojo
+import com.juangomez.remote.util.pojoList
 import com.juangomez.remote.util.string
-import junit.framework.Assert.assertEquals
+import junit.framework.Assert
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 
-class GetEpisodeTest : BaseRemoteTest() {
+class GetCharactersTest : BaseRemoteTest() {
 
-    private lateinit var episodeRemoteProvider: EpisodeRemoteProvider
+    private lateinit var charactersRemoteProvider: CharacterRemoteProvider
 
     override fun setup() {
         super.setup()
-        episodeRemoteProvider = EpisodeRemoteProviderImpl(
+        charactersRemoteProvider = CharacterRemoteProviderImpl(
             APIService(
-                EpisodeAPIService::class.java,
+                CharacterAPIService::class.java,
                 BASE_URL,
                 provideGsonConverterFactory(),
                 provideInterceptors()
@@ -34,9 +37,9 @@ class GetEpisodeTest : BaseRemoteTest() {
 
     @Test
     fun `should get a valid response`() {
-        val episodeId = 1
-        val jsonResponse = JSONFile.GET_EPISODE_RESPONSE.string()
-        val pojoResponse = pojo(jsonResponse, RemoteEpisode::class.java)
+        val charactersId = listOf(1, 183)
+        val jsonResponse = JSONFile.GET_CHARACTERS_RESPONSE.string()
+        val pojoResponse = pojoList(jsonResponse, RemoteCharacter::class.java)
 
         mockWebServer.enqueue(
             MockResponse()
@@ -45,9 +48,9 @@ class GetEpisodeTest : BaseRemoteTest() {
         )
 
         runBlocking {
-            val response = episodeRemoteProvider.getEpisodeById(episodeId)
+            val response = charactersRemoteProvider.getCharactersById(charactersId)
             assertEquals(
-                Either.Right(pojoResponse.toEpisode()),
+                Either.Right(pojoResponse.toCharacters()),
                 response
             )
         }
@@ -55,7 +58,7 @@ class GetEpisodeTest : BaseRemoteTest() {
 
     @Test
     fun `should get a failure response with server error code`() {
-        val episodeId = 1
+        val charactersId = listOf(1, 183)
 
         mockWebServer.enqueue(
             MockResponse()
@@ -63,7 +66,7 @@ class GetEpisodeTest : BaseRemoteTest() {
         )
 
         runBlocking {
-            val response = episodeRemoteProvider.getEpisodeById(episodeId)
+            val response = charactersRemoteProvider.getCharactersById(charactersId)
             assertEquals(
                 Either.Left(Failure.ServerError),
                 response

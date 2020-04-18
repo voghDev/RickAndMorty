@@ -6,11 +6,11 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface EpisodesAPIService {
+interface EpisodeAPIService {
 
     @GET("/episode")
     suspend fun getEpisodes(@Query("page") page: Int): GetEpisodesResponse
 
     @GET("/episode/{id}")
-    suspend fun getEpisode(@Path("id") id: Int): RemoteEpisode
+    suspend fun getEpisodeById(@Path("id") id: Int): RemoteEpisode
 }
