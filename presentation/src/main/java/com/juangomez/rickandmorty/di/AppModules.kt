@@ -21,8 +21,10 @@ import com.juangomez.remote.services.episodes.EpisodeAPIService
 import com.juangomez.remote.services.episodes.EpisodeRemoteProviderImpl
 import com.juangomez.rickandmorty.BuildConfig.BASE_URL
 import com.juangomez.rickandmorty.BuildConfig.DEBUG
+import com.juangomez.rickandmorty.views.seasons.SeasonsViewModel
 import okhttp3.Interceptor
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.converter.gson.GsonConverterFactory
@@ -87,4 +89,10 @@ val domainModule = module {
     factory { GetEpisodeUseCase(get()) }
 
     factory { GetCharactersUseCase(get()) }
+}
+
+val presentationModule = module {
+    viewModel {
+        SeasonsViewModel(get())
+    }
 }

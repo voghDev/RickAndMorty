@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RickAndMorty</string>
+    <string name="summary">Traveling across the multiverse together, super genius Rick Sanchez and his grandson Morty Smith embark on wacky adventures where only one thing is absolute: Rick is the smartest madman in all the multiverse and nothing can change that, portal guns and all.</string>
+    <string name="season_number">Season %d</string>
 </resources>
