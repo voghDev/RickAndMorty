@@ -14,7 +14,7 @@ android {
         versionCode getVersionCodeFromProperties()
         versionName getVersionNameFromProperties()
 
-        buildConfigField "String", "BASE_URL", '"https://rickandmortyapi.com/api"'
+        buildConfigField "String", "BASE_URL", '"https://rickandmortyapi.com/"'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -24,6 +24,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -36,6 +41,7 @@ dependencies {
             support.appCompat,
             support.constraintlayout,
             support.recyclerview,
+            support.lifecycleViewModel,
             retrofit.gson,
             okhttp.interceptor,
             koin.viewModel,

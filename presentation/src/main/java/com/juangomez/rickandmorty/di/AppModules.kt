@@ -46,14 +46,14 @@ val remoteModule = module {
         httpLoggingInterceptor
     }
 
-    single(named(INTERCEPTORS)) { arrayOf(get() as Interceptor) }
+    single(named(INTERCEPTORS)) { arrayOf(get(named(HTTP_LOGGING)) as Interceptor) }
 
     single(named(EPISODE_API_SERVICE)) {
         APIService(
             EpisodeAPIService::class.java,
             BASE_URL,
-            get(),
-            get()
+            get(named(GSON_CONVERTER_FACTORY)),
+            get(named(INTERCEPTORS))
         )
     }
 
@@ -61,8 +61,8 @@ val remoteModule = module {
         APIService(
             CharacterAPIService::class.java,
             BASE_URL,
-            get(),
-            get()
+            get(named(GSON_CONVERTER_FACTORY)),
+            get(named(INTERCEPTORS))
         )
     }
 

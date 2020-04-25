@@ -14,6 +14,7 @@ ext {
     def constraintlayoutVersion = '2.0.0-beta4'
     def recyclerviewVersion = '1.1.0'
     def koinVersion = '2.0.1'
+    def lifecycleVersion = "2.2.0"
 
     configPlugins = [
             androidPlugin: "com.android.tools.build:gradle:${androidPluginVersion}",
@@ -63,7 +64,8 @@ ext {
     support = [
             appCompat       : "androidx.appcompat:appcompat:${appCompatVersion}",
             constraintlayout: "androidx.constraintlayout:constraintlayout:${constraintlayoutVersion}",
-            recyclerview    : "androidx.recyclerview:recyclerview:${recyclerviewVersion}"
+            recyclerview    : "androidx.recyclerview:recyclerview:${recyclerviewVersion}",
+            lifecycleViewModel : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}"
     ]
 
     koin = [

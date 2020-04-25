@@ -6,6 +6,6 @@ import retrofit2.http.Path
 
 interface CharacterAPIService {
 
-    @GET("/character/{ids}")
+    @GET("api/character/{ids}")
     suspend fun getEpisodeById(@Path("ids") ids: List<Int>): List<RemoteCharacter>
 }
