@@ -34,6 +34,7 @@ class SeasonsActivity : BaseActivity() {
             }
             is SeasonsViewModel.State.Error -> {
                 hideLoading()
+                showDefaultError(state.failure) { viewModel.retryUseCase(state.useCase) }
             }
             is SeasonsViewModel.State.SeasonsLoaded -> {
                 hideLoading()
@@ -59,10 +60,15 @@ class SeasonsActivity : BaseActivity() {
                 R.layout.season_row,
                 seasons.map { getString(R.string.season_number).format(it.number) })
 
-            onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
 
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
                     viewModel.onSeasonSelected(seasons[position])
                 }
             }

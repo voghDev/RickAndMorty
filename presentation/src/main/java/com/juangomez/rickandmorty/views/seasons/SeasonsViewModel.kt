@@ -13,7 +13,11 @@ class SeasonsViewModel(private val getSeasonsUseCase: GetSeasonsUseCase) : BaseV
         object Loading : State()
         data class SeasonsLoaded(val seasons: List<Season>) : State()
         data class SeasonSelected(val season: Season) : State()
-        data class Error(val failure: Failure) : State()
+        data class Error(val failure: Failure, val useCase: UseCase) : State()
+    }
+
+    enum class UseCase {
+        GET_SEASONS
     }
 
     private lateinit var seasons: List<Season>
@@ -28,12 +32,19 @@ class SeasonsViewModel(private val getSeasonsUseCase: GetSeasonsUseCase) : BaseV
         }
     }
 
+    fun retryUseCase(useCase: UseCase) {
+        viewState.value = State.Loading
+        when (useCase) {
+            UseCase.GET_SEASONS -> getSeasons()
+        }
+    }
+
     fun onSeasonSelected(season: Season) {
         viewState.value = State.SeasonSelected(season)
     }
 
     private fun handleGetSeasonError(failure: Failure) {
-        viewState.value = State.Error(failure)
+        viewState.value = State.Error(failure, UseCase.GET_SEASONS)
     }
 
     private fun handleGetSeasonsSuccess(seasons: List<Season>) {
