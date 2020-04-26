@@ -2,4 +2,8 @@
     <string name="app_name">RickAndMorty</string>
     <string name="summary">Traveling across the multiverse together, super genius Rick Sanchez and his grandson Morty Smith embark on wacky adventures where only one thing is absolute: Rick is the smartest madman in all the multiverse and nothing can change that, portal guns and all.</string>
     <string name="season_number">Season %d</string>
+    <string name="dialog_generic_error_title">Ups! Something wrong happened</string>
+    <string name="dialog_generic_error_description">It\'s seems that Rick is in troubles. Please, try again</string>
+    <string name="dialog_network_error_description">It\'s seems you connection is failing. Please, try again</string>
+    <string name="dialog_generic_error_try_again_button">Try again</string>
 </resources>

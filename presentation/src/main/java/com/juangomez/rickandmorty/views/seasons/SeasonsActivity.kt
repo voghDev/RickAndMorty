@@ -53,17 +53,18 @@ class SeasonsActivity : BaseActivity() {
     private fun showSeasonsContentLayout() = seasons_content_layout.visible()
 
     private fun setupSeasonsSelector(seasons: List<Season>) {
-        season_number_text_selector.adapter =
-            ArrayAdapter(
-                this,
+        season_number_text_selector.apply {
+            adapter = ArrayAdapter(
+                this@SeasonsActivity,
                 R.layout.season_row,
                 seasons.map { getString(R.string.season_number).format(it.number) })
 
-        season_number_text_selector.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                viewModel.onSeasonSelected(seasons[position])
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    viewModel.onSeasonSelected(seasons[position])
+                }
             }
         }
     }

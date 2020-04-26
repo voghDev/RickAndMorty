@@ -46,7 +46,8 @@ dependencies {
             okhttp.interceptor,
             koin.viewModel,
             koin.core,
-            koin.android
+            koin.android,
+            materialDialogs.core
     )
 
     implementation project(":common")
