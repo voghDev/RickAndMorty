@@ -2,9 +2,9 @@ package com.juangomez.cache
 
 import com.juangomez.data.providers.cache.EpisodeCacheProvider
 import com.juangomez.domain.models.Episode
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import junit.framework.Assert.assertEquals
+import org.junit.Before
+import org.junit.Test
 import java.util.*
 
 class EpisodeCacheProviderTest {
@@ -12,7 +12,7 @@ class EpisodeCacheProviderTest {
     private lateinit var episodeCacheProvider: EpisodeCacheProvider
     private lateinit var episodes: List<Episode>
 
-    @BeforeEach
+    @Before
     fun setup() {
         episodeCacheProvider = EpisodeCacheProviderImpl()
         episodes = populateEpisodeCache()

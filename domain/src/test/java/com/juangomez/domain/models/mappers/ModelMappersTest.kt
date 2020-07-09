@@ -3,13 +3,13 @@ package com.juangomez.domain.models.mappers
 import com.juangomez.domain.models.*
 import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.MockK
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import org.junit.Before
+import org.junit.Test
 import java.util.*
 
 class ModelMappersTest {
 
-    @BeforeEach
+    @Before
     fun setup() = MockKAnnotations.init(this)
 
     @Test

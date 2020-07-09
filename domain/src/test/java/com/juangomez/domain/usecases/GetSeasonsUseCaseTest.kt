@@ -11,8 +11,8 @@ import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import org.junit.Before
+import org.junit.Test
 
 class GetSeasonsUseCaseTest {
 
@@ -21,7 +21,7 @@ class GetSeasonsUseCaseTest {
     @MockK
     private lateinit var episodeRepository: EpisodeRepository
 
-    @BeforeEach
+    @Before
     fun setup() = MockKAnnotations.init(this)
 
     @Test

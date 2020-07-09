@@ -14,10 +14,10 @@ import com.juangomez.remote.util.pojo
 import com.juangomez.remote.util.pojoList
 import com.juangomez.remote.util.string
 import junit.framework.Assert
+import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertEquals
 
 class GetCharactersTest : BaseRemoteTest() {
 

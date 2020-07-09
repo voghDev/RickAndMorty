@@ -3,17 +3,16 @@ package com.juangomez.cache
 import com.juangomez.data.providers.cache.CharacterCacheProvider
 import com.juangomez.domain.models.Character
 import com.juangomez.domain.models.SummaryLocation
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import junit.framework.Assert.assertEquals
+import org.junit.Before
+import org.junit.Test
 
 class CharacterCacheProviderTest {
 
     private lateinit var characterCacheProvider: CharacterCacheProvider
     private lateinit var characters: List<Character>
 
-    @BeforeEach
+    @Before
     fun setup() {
         characterCacheProvider = CharacterCacheProviderImpl()
         characters = populateCharacterCache()

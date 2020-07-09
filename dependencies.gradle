@@ -23,9 +23,6 @@ ext {
 
     def archVersion = "2.0.0"
 
-    def cardviewVersion = "1.0.0"
-    def viewpagerVersion = "1.0.0"
-    def materialVersion = "1.1.0-alpha10"
     def ktxVersion = "1.0.0"
     def espressoVersion = "3.2.0"
     def appCenterVersion = "3.0.0"
@@ -81,7 +78,8 @@ ext {
             appCompat       : "androidx.appcompat:appcompat:${appCompatVersion}",
             constraintlayout: "androidx.constraintlayout:constraintlayout:${constraintlayoutVersion}",
             recyclerview    : "androidx.recyclerview:recyclerview:${recyclerviewVersion}",
-            lifecycleViewModel : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}"
+            lifecycleViewModel : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}",
+            ktx                : "androidx.core:core-ktx:${ktxVersion}"
     ]
 
     koin = [
