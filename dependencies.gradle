@@ -7,7 +7,7 @@ ext {
     def retrofitVersion = '2.8.1'
     def okhttpVersion = '3.14.7'
     def gsonVersion = '2.8.6'
-    def junitVersion = '5.6.2'
+    def junitVersion = '4.12'
     def mockkVersion = '1.9.3'
     def timberVersion = '4.7.1'
     def appCompatVersion = '1.1.0'
@@ -16,6 +16,20 @@ ext {
     def koinVersion = '2.0.1'
     def lifecycleVersion = '2.2.0'
     def materialDialogsVersion = '3.1.1'
+
+    def androidxTestVersion = "1.2.0"
+
+    def junitXVersion = "1.1.0"
+
+    def archVersion = "2.0.0"
+
+    def cardviewVersion = "1.0.0"
+    def viewpagerVersion = "1.0.0"
+    def materialVersion = "1.1.0-alpha10"
+    def ktxVersion = "1.0.0"
+    def espressoVersion = "3.2.0"
+    def appCenterVersion = "3.0.0"
+    def appCenterEspressoVersion = "1.4"
 
     configPlugins = [
             androidPlugin: "com.android.tools.build:gradle:${androidPluginVersion}",
@@ -51,7 +65,8 @@ ext {
     ]
 
     junit = [
-            junit: "org.junit.jupiter:junit-jupiter:${junitVersion}"
+            junit : "junit:junit:${junitVersion}",
+            junitX: "androidx.test.ext:junit:${junitXVersion}"
     ]
 
     mockk = [
@@ -73,10 +88,35 @@ ext {
             viewModel: "org.koin:koin-android-viewmodel:${koinVersion}",
             android  : "org.koin:koin-android:${koinVersion}",
             core     : "org.koin:koin-core:${koinVersion}",
-            test     : "org.koin:koin-test:${koinVersion}"
+            test     : "org.koin:koin-test:${koinVersion}",
+            ext      : "org.koin:koin-android-ext:${koinVersion}"
     ]
 
     materialDialogs = [
             core: "com.afollestad.material-dialogs:core:${materialDialogsVersion}"
+    ]
+
+    espresso = [
+            core   : "androidx.test.espresso:espresso-core:${espressoVersion}",
+            intents: "androidx.test.espresso:espresso-intents:${espressoVersion}",
+            contrib: "androidx.test.espresso:espresso-contrib:${espressoVersion}"
+    ]
+
+    androidxTest = [
+            runner      : "androidx.test:runner:${androidxTestVersion}",
+            rules       : "androidx.test:rules:${androidxTestVersion}",
+            core        : "androidx.test:core:${androidxTestVersion}",
+            orchestrator: "androidx.test:orchestrator:${androidxTestVersion}",
+            truth       : "androidx.test.ext:truth:${androidxTestVersion}",
+    ]
+
+    appcenter = [
+            analytics: "com.microsoft.appcenter:appcenter-analytics:${appCenterVersion}",
+            crashes  : "com.microsoft.appcenter:appcenter-crashes:${appCenterVersion}",
+            espresso : "com.microsoft.appcenter:espresso-test-extension:${appCenterEspressoVersion}"
+    ]
+
+    arch = [
+            test: "androidx.arch.core:core-testing:${archVersion}"
     ]
 }

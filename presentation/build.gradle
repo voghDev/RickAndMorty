@@ -50,6 +50,23 @@ dependencies {
             materialDialogs.core
     )
 
+    androidTestImplementation(
+            espresso.core,
+            espresso.intents,
+            koin.test,
+            mockk.mockk,
+            androidxTest.runner,
+            androidxTest.rules,
+            androidxTest.core,
+            appcenter.espresso,
+            arch.test,
+            junit.junitX
+    )
+
+    testImplementation(
+            junit.junitX
+    )
+
     implementation project(":common")
     implementation project(":domain")
     implementation project(":data")
