@@ -54,6 +54,7 @@ dependencies {
             espresso.core,
             espresso.intents,
             koin.test,
+            coroutines.test,
             mockk.mockk,
             androidxTest.runner,
             androidxTest.rules,

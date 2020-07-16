@@ -17,11 +17,7 @@ open class BaseInstrumentationTest : KoinTest {
         Intents.release()
     }
 
-    fun w8(seconds: Long) = Thread.sleep(seconds)
-
     companion object {
         private const val FINGERPRINT = "INSTRUMENTATION_TEST_DEMO_FINGERPRINT"
-        const val LOGOUT_SERVICE_DELAY = 1500L
-        const val LOGIN_SERVICE_DELAY = 2500L
     }
 }

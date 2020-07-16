@@ -9,6 +9,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import com.juangomez.rickandmorty.views.seasons.SeasonsActivity
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,9 +26,8 @@ class SeasonsActivityTest : BaseInstrumentationTest() {
     }
 
     @Test
-    fun showsSeasonsSuccessfully() {
+    fun showsSeasonsSuccessfully() = runBlockingTest {
         startActivity()
-        w8(LOGIN_SERVICE_DELAY)
         isImageVisible()
     }
 
