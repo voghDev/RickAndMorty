@@ -27,21 +27,18 @@ import org.koin.test.KoinTest
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class SeasonsActivityTest : KoinTest {
+class SeasonsActivityTest : BaseInstrumentationTest() {
     private val testModule = module {
         factory { GetSeasonsMockUseCase() }
-
-        factory { GetEpisodeUseCase(get()) }
-
-        factory { GetCharactersUseCase(get()) }
 
         viewModel {
             SeasonsViewModel(GetSeasonsUseCase(MockEpisodeRepository()))
         }
     }
 
-    @Before
-    fun setUp() {
+    override fun setup() {
+        super.setup()
+
         stopKoin()
         startKoin { modules(testModule) }
     }
@@ -51,13 +48,13 @@ class SeasonsActivityTest : KoinTest {
     var mActivityTestRule = ActivityTestRule(SeasonsActivity::class.java, true, false)
 
     @Test
-    fun showsSeasonImageSuccessfully() = runBlockingTest {
+    fun showsSeasonImageSuccessfully() {
         startActivity()
         isImageVisible()
     }
 
     @Test
-    fun showsSeasonTextSuccessfully() = runBlockingTest {
+    fun showsSeasonTextSuccessfully() {
         startActivity()
         isTextVisible()
     }
