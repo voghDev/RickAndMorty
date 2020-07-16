@@ -46,7 +46,7 @@ class SeasonsActivityTest : BaseInstrumentationTest() {
         onView(withId(R.id.season_number_text_selector)).perform(click())
         onView(withText("Season 2")).perform(click());
 
-        onView(withText("Bjorn slippy")).check(matches(isDisplayed()))
+        onView(withText("A Rickle in Time")).check(matches(isDisplayed()))
     }
 
     @Test
@@ -55,7 +55,7 @@ class SeasonsActivityTest : BaseInstrumentationTest() {
         onView(withId(R.id.season_number_text_selector)).perform(click())
         onView(withText("Season 1")).perform(click());
 
-        onView(withText("A day at the races")).check(matches(isDisplayed()))
+        onView(withText("Pilot")).check(matches(isDisplayed()))
     }
 
     private fun startActivity() {

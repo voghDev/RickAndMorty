@@ -9,14 +9,14 @@ import java.util.*
 
 class MockEpisodeRepository : EpisodeRepository {
     private val episodes = mapOf(
-        1 to Episode(1, "A day at the races", "1/1/2020".toDate(), 1, 1, listOf(1, 2, 3)),
-        2 to Episode(2, "One measure, one metric", "1/2/2020".toDate(), 1, 2, listOf(1, 2, 3)),
-        3 to Episode(3, "The doll", "1/3/2020".toDate(), 1, 3, listOf(1, 2)),
-        4 to Episode(4, "Things go well", "1/4/2020".toDate(), 1, 4, listOf(1, 2)),
-        5 to Episode(5, "Bjorn slippy", "1/5/2020".toDate(), 2, 1, listOf(1, 2, 3)),
-        6 to Episode(6, "The underdog", "1/6/2020".toDate(), 2, 2, listOf(1, 2, 3)),
-        7 to Episode(7, "Sat and vice", "1/7/2020".toDate(), 2, 3, listOf(1, 2)),
-        8 to Episode(8, "Tremendous mess", "1/8/2020".toDate(), 2, 4, listOf(1, 2))
+        1 to Episode(1, "Pilot", "2/12/2013".toDate(), 1, 1, listOf(1, 2, 3)),
+        2 to Episode(2, "Lawnmower Dog", "9/12/2013".toDate(), 1, 2, listOf(1, 2, 3)),
+        3 to Episode(3, "Anatomy Park", "16/12/2013".toDate(), 1, 3, listOf(1, 2)),
+        4 to Episode(4, "M. Night Shaym-Aliens!", "1/4/2013".toDate(), 1, 4, listOf(1, 2)),
+        5 to Episode(5, "A Rickle in Time", "26/7/2015".toDate(), 2, 1, listOf(1, 2, 3)),
+        6 to Episode(6, "Mortynight Run", "2/8/2015".toDate(), 2, 2, listOf(1, 2, 3)),
+        7 to Episode(7, "Auto Erotic Assimilation", "9/8/2015".toDate(), 2, 3, listOf(1, 2)),
+        8 to Episode(8, "Total Rickall", "16/8/2015".toDate(), 2, 4, listOf(1, 2))
     )
 
     private fun String.toDate() =
