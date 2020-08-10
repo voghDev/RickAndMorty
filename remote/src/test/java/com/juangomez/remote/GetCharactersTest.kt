@@ -1,6 +1,6 @@
 package com.juangomez.remote
 
-import com.juangomez.common.CEither
+import arrow.core.Either
 import com.juangomez.common.Failure
 import com.juangomez.data.providers.remote.CharacterRemoteProvider
 import com.juangomez.remote.models.RemoteCharacter
@@ -47,7 +47,7 @@ class GetCharactersTest : BaseRemoteTest() {
         runBlocking {
             val response = charactersRemoteProvider.getCharactersById(charactersId)
             assertEquals(
-                CEither.Right(pojoResponse.toCharacters()),
+                Either.Right(pojoResponse.toCharacters()),
                 response
             )
         }
@@ -65,7 +65,7 @@ class GetCharactersTest : BaseRemoteTest() {
         runBlocking {
             val response = charactersRemoteProvider.getCharactersById(charactersId)
             assertEquals(
-                CEither.Left(Failure.ServerError),
+                Either.Left(Failure.ServerError),
                 response
             )
         }

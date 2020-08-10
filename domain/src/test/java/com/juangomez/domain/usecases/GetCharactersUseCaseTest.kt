@@ -1,6 +1,6 @@
 package com.juangomez.domain.usecases
 
-import com.juangomez.common.CEither
+import arrow.core.Either
 import com.juangomez.domain.models.Character
 import com.juangomez.domain.repositories.CharacterRepository
 import io.mockk.MockKAnnotations
@@ -28,7 +28,7 @@ class GetCharactersUseCaseTest {
         val characters = mockk<List<Character>>()
         getCharactersUseCase = GetCharactersUseCase(characterRepository)
 
-        coEvery { characterRepository.getCharactersById(characterIds) } returns CEither.Right(characters)
+        coEvery { characterRepository.getCharactersById(characterIds) } returns Either.Right(characters)
         runBlocking { getCharactersUseCase.invoke(this, GetCharactersUseCase.Params(characterIds)) }
         coVerify(exactly = 1) { characterRepository.getCharactersById(characterIds) }
     }
