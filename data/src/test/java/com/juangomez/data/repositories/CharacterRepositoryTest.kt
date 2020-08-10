@@ -1,6 +1,6 @@
 package com.juangomez.data.repositories
 
-import com.juangomez.common.Either
+import com.juangomez.common.CEither
 import com.juangomez.common.Failure
 import com.juangomez.data.providers.cache.CharacterCacheProvider
 import com.juangomez.data.providers.remote.CharacterRemoteProvider
@@ -55,7 +55,7 @@ class CharacterRepositoryTest {
         characterRepository = CharacterRepositoryImpl(characterRemoteProvider, characterCacheProvider)
 
         coEvery { characterCacheProvider.getCharactersById(characterIds) } returns emptyCharactersList
-        coEvery { characterRemoteProvider.getCharactersById(characterIds) } returns Either.Right(characters)
+        coEvery { characterRemoteProvider.getCharactersById(characterIds) } returns CEither.Right(characters)
         coEvery { characterCacheProvider.setCharacters(characters) } returns Unit
         runBlocking { characterRepository.getCharactersById(characterIds) }
         coVerify(exactly = 1) { characterCacheProvider.getCharactersById(characterIds) }
@@ -72,7 +72,7 @@ class CharacterRepositoryTest {
         characterRepository = CharacterRepositoryImpl(characterRemoteProvider, characterCacheProvider)
 
         coEvery { characterCacheProvider.getCharactersById(characterIds) } returns emptyCharactersList
-        coEvery { characterRemoteProvider.getCharactersById(characterIds) } returns Either.Left(Failure.ServerError)
+        coEvery { characterRemoteProvider.getCharactersById(characterIds) } returns CEither.Left(Failure.ServerError)
         coEvery { characterCacheProvider.setCharacters(characters) } returns Unit
         runBlocking { characterRepository.getCharactersById(characterIds) }
         coVerify(exactly = 1) { characterCacheProvider.getCharactersById(characterIds) }

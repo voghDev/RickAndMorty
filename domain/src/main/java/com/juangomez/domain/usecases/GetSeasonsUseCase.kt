@@ -1,8 +1,7 @@
 package com.juangomez.domain.usecases
 
-import com.juangomez.common.Either
+import arrow.core.Either
 import com.juangomez.common.Failure
-import com.juangomez.common.map
 import com.juangomez.domain.models.Season
 import com.juangomez.domain.models.groupBySeasons
 import com.juangomez.domain.repositories.EpisodeRepository

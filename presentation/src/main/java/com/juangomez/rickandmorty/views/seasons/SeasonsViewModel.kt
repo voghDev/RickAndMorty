@@ -28,7 +28,7 @@ class SeasonsViewModel(private val getSeasonsUseCase: GetSeasonsUseCase) : BaseV
 
     fun getSeasons() {
         getSeasonsUseCase.invoke(viewModelScope, BaseUseCase.None()) {
-            it.either(::handleGetSeasonError, ::handleGetSeasonsSuccess)
+            it.fold(::handleGetSeasonError, ::handleGetSeasonsSuccess)
         }
     }
 

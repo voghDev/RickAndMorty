@@ -7,7 +7,8 @@ dependencies {
             retrofit.runtime,
             retrofit.gson,
             retrofit.scalars,
-            okhttp.interceptor
+            okhttp.interceptor,
+            arrow.core
     )
 
     testImplementation(

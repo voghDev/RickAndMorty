@@ -1,8 +1,7 @@
 package com.juangomez.data.repositories
 
-import com.juangomez.common.Either
+import arrow.core.Either
 import com.juangomez.common.Failure
-import com.juangomez.common.map
 import com.juangomez.data.providers.cache.EpisodeCacheProvider
 import com.juangomez.data.providers.remote.EpisodeRemoteProvider
 import com.juangomez.domain.models.Episode

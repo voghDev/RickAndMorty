@@ -1,11 +1,10 @@
 package com.juangomez.rickandmorty
 
-import com.juangomez.common.Either
+import com.juangomez.common.CEither
 import com.juangomez.common.Failure
 import com.juangomez.domain.models.Episode
 import com.juangomez.domain.repositories.EpisodeRepository
 import java.text.SimpleDateFormat
-import java.util.*
 
 class MockEpisodeRepository : EpisodeRepository {
     private val episodes = mapOf(
@@ -22,9 +21,9 @@ class MockEpisodeRepository : EpisodeRepository {
     private fun String.toDate() =
         SimpleDateFormat("dd/MM/YYYY").parse(this)
 
-    override suspend fun getEpisodes(): Either<Failure, List<Episode>> =
-        Either.Right(episodes.map { it.value })
+    override suspend fun getEpisodes(): CEither<Failure, List<Episode>> =
+        CEither.Right(episodes.map { it.value })
 
-    override suspend fun getEpisode(id: Int): Either<Failure, Episode> =
-        Either.Right(episodes[id]!!)
+    override suspend fun getEpisode(id: Int): CEither<Failure, Episode> =
+        CEither.Right(episodes[id]!!)
 }

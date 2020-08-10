@@ -1,6 +1,6 @@
 package com.juangomez.domain.usecases
 
-import com.juangomez.common.Either
+import arrow.core.Either
 import com.juangomez.common.Failure
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async

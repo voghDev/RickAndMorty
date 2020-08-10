@@ -1,6 +1,6 @@
 package com.juangomez.remote.services
 
-import com.juangomez.common.Either
+import arrow.core.Either
 import com.juangomez.common.Failure
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

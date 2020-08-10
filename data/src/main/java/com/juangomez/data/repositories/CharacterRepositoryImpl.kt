@@ -1,8 +1,8 @@
 package com.juangomez.data.repositories
 
-import com.juangomez.common.Either
+import arrow.core.Either
+import arrow.core.flatMap
 import com.juangomez.common.Failure
-import com.juangomez.common.map
 import com.juangomez.data.providers.cache.CharacterCacheProvider
 import com.juangomez.data.providers.remote.CharacterRemoteProvider
 import com.juangomez.domain.models.Character
@@ -20,9 +20,9 @@ class CharacterRepositoryImpl(
 
         return if (characterIdsToGetFromRemote.isEmpty()) Either.Right(cachedCharacters)
         else characterRemoteProvider.getCharactersById(characterIdsToGetFromRemote)
-            .map { characters ->
-                characterCacheProvider.setCharacters(characters)
-                characters
-            }
+                .flatMap { characters ->
+                    characterCacheProvider.setCharacters(characters)
+                    Either.Right(characters)
+                }
     }
 }

@@ -1,6 +1,6 @@
 package com.juangomez.data.providers.remote
 
-import com.juangomez.common.Either
+import arrow.core.Either
 import com.juangomez.common.Failure
 import com.juangomez.domain.models.Episode
 

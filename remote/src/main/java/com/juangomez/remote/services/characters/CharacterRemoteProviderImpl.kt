@@ -1,6 +1,6 @@
 package com.juangomez.remote.services.characters
 
-import com.juangomez.common.Either
+import arrow.core.Either
 import com.juangomez.common.Failure
 import com.juangomez.data.providers.remote.CharacterRemoteProvider
 import com.juangomez.domain.models.Character

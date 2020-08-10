@@ -1,6 +1,6 @@
 package com.juangomez.remote.services.episodes
 
-import com.juangomez.common.Either
+import arrow.core.Either
 import com.juangomez.common.Failure
 import com.juangomez.data.providers.remote.EpisodeRemoteProvider
 import com.juangomez.domain.models.Episode
@@ -19,8 +19,8 @@ class EpisodeRemoteProviderImpl(private val api: APIService<EpisodeAPIService>) 
         while (page != null) {
             when (val response = api.execute { api.service.getEpisodes(page!!) }) {
                 is Either.Right -> {
-                    page = response.data.info.getNextPage()
-                    episodes.addAll(response.data.results)
+                    page = response.b.info.getNextPage()
+                    episodes.addAll(response.b.results)
                 }
                 is Either.Left -> return response
             }

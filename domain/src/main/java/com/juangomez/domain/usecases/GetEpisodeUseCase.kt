@@ -1,6 +1,6 @@
 package com.juangomez.domain.usecases
 
-import com.juangomez.common.Either
+import arrow.core.Either
 import com.juangomez.common.Failure
 import com.juangomez.domain.models.Episode
 import com.juangomez.domain.repositories.EpisodeRepository

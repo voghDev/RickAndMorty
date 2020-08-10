@@ -1,19 +1,16 @@
 package com.juangomez.remote
 
-import com.juangomez.common.Either
+import com.juangomez.common.CEither
 import com.juangomez.common.Failure
 import com.juangomez.data.providers.remote.CharacterRemoteProvider
 import com.juangomez.remote.models.RemoteCharacter
-import com.juangomez.remote.models.toCharacter
 import com.juangomez.remote.models.toCharacters
 import com.juangomez.remote.services.APIService
 import com.juangomez.remote.services.characters.CharacterAPIService
 import com.juangomez.remote.services.characters.CharacterRemoteProviderImpl
 import com.juangomez.remote.util.JSONFile
-import com.juangomez.remote.util.pojo
 import com.juangomez.remote.util.pojoList
 import com.juangomez.remote.util.string
-import junit.framework.Assert
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
@@ -50,7 +47,7 @@ class GetCharactersTest : BaseRemoteTest() {
         runBlocking {
             val response = charactersRemoteProvider.getCharactersById(charactersId)
             assertEquals(
-                Either.Right(pojoResponse.toCharacters()),
+                CEither.Right(pojoResponse.toCharacters()),
                 response
             )
         }
@@ -68,7 +65,7 @@ class GetCharactersTest : BaseRemoteTest() {
         runBlocking {
             val response = charactersRemoteProvider.getCharactersById(charactersId)
             assertEquals(
-                Either.Left(Failure.ServerError),
+                CEither.Left(Failure.ServerError),
                 response
             )
         }
