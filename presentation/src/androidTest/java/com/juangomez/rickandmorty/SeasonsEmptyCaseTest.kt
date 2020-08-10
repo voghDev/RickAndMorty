@@ -45,7 +45,7 @@ class SeasonsEmptyCaseTest : BaseInstrumentationTest() {
 
     @Rule
     @JvmField
-    var mActivityTestRule = ActivityTestRule(SeasonsActivity::class.java, true, false)
+    var activityTestRule = ActivityTestRule(SeasonsActivity::class.java, true, false)
 
     @Test
     fun showsSeasonImageSuccessfully() {
@@ -75,6 +75,6 @@ class SeasonsEmptyCaseTest : BaseInstrumentationTest() {
 
     private fun startActivity() {
         val intent = Intent()
-        mActivityTestRule.launchActivity(intent)
+        activityTestRule.launchActivity(intent)
     }
 }
