@@ -1,8 +1,7 @@
 package com.juangomez.data.repositories
 
-import com.juangomez.common.CEither
+import arrow.core.Either
 import com.juangomez.common.Failure
-import com.juangomez.common.map
 import com.juangomez.data.providers.cache.EpisodeCacheProvider
 import com.juangomez.data.providers.remote.EpisodeRemoteProvider
 import com.juangomez.domain.models.Episode
@@ -13,16 +12,16 @@ class EpisodeRepositoryImpl(
     private val episodeCacheProvider: EpisodeCacheProvider
 ) : EpisodeRepository {
 
-    override suspend fun getEpisodes(): CEither<Failure, List<Episode>> =
+    override suspend fun getEpisodes(): Either<Failure, List<Episode>> =
         episodeRemoteProvider.getEpisodes().map { remoteEpisodes ->
             episodeCacheProvider.setEpisodes(remoteEpisodes)
             remoteEpisodes
         }
 
-    override suspend fun getEpisode(id: Int): CEither<Failure, Episode> {
+    override suspend fun getEpisode(id: Int): Either<Failure, Episode> {
         val cachedEpisode = episodeCacheProvider.getEpisodeById(id)
         return if (cachedEpisode != null) {
-            CEither.Right(cachedEpisode)
+            Either.Right(cachedEpisode)
         } else {
             episodeRemoteProvider.getEpisodeById(id).map { remoteEpisode ->
                 episodeCacheProvider.setEpisode(remoteEpisode)

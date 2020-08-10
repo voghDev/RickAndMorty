@@ -4,7 +4,8 @@ apply plugin: 'kotlin-kapt'
 dependencies {
     implementation(
             kotlin.stdlib,
-            coroutines.core
+            coroutines.core,
+            arrow.core
     )
 
     testImplementation(

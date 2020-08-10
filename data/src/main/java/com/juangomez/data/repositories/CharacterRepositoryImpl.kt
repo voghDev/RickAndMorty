@@ -1,8 +1,8 @@
 package com.juangomez.data.repositories
 
-import com.juangomez.common.CEither
+import arrow.core.Either
+import arrow.core.flatMap
 import com.juangomez.common.Failure
-import com.juangomez.common.map
 import com.juangomez.data.providers.cache.CharacterCacheProvider
 import com.juangomez.data.providers.remote.CharacterRemoteProvider
 import com.juangomez.domain.models.Character
@@ -13,16 +13,16 @@ class CharacterRepositoryImpl(
     private val characterCacheProvider: CharacterCacheProvider
 ) : CharacterRepository {
 
-    override suspend fun getCharactersById(ids: List<Int>): CEither<Failure, List<Character>> {
+    override suspend fun getCharactersById(ids: List<Int>): Either<Failure, List<Character>> {
         val cachedCharacters = characterCacheProvider.getCharactersById(ids)
         val cachedCharacterIds = cachedCharacters.map { character -> character.id }
         val characterIdsToGetFromRemote = ids.filterNot { it in cachedCharacterIds }
 
-        return if (characterIdsToGetFromRemote.isEmpty()) CEither.Right(cachedCharacters)
+        return if (characterIdsToGetFromRemote.isEmpty()) Either.Right(cachedCharacters)
         else characterRemoteProvider.getCharactersById(characterIdsToGetFromRemote)
-            .map { characters ->
-                characterCacheProvider.setCharacters(characters)
-                characters
-            }
+                .flatMap { characters ->
+                    characterCacheProvider.setCharacters(characters)
+                    Either.Right(characters)
+                }
     }
 }

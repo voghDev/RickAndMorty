@@ -1,6 +1,6 @@
 package com.juangomez.domain.usecases
 
-import com.juangomez.common.CEither
+import arrow.core.Either
 import com.juangomez.common.Failure
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
@@ -9,12 +9,12 @@ import kotlinx.coroutines.supervisorScope
 
 abstract class BaseUseCase<out Type, in Params> where Type : Any {
 
-    abstract suspend fun run(params: Params): CEither<Failure, Type>
+    abstract suspend fun run(params: Params): Either<Failure, Type>
 
     open operator fun invoke(
         scope: CoroutineScope,
         params: Params,
-        onResult: (CEither<Failure, Type>) -> Unit = {}
+        onResult: (Either<Failure, Type>) -> Unit = {}
     ) {
         scope.launch {
             supervisorScope {

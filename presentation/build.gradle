@@ -47,7 +47,8 @@ dependencies {
             koin.viewModel,
             koin.core,
             koin.android,
-            materialDialogs.core
+            materialDialogs.core,
+            arrow.core
     )
 
     androidTestImplementation(
