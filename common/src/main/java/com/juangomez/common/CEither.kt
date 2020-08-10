@@ -13,7 +13,7 @@ sealed class CEither<out L : Failure, out R> {
         Left(failure)
     fun <R> right(data: R) = Right(data)
 
-    fun either(fnL: (L) -> Any, fnR: (R) -> Any): Any =
+    fun fold(fnL: (L) -> Any, fnR: (R) -> Any): Any =
         when (this) {
             is Left -> fnL(failure)
             is Right -> fnR(data)
