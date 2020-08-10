@@ -8,7 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
-import com.juangomez.common.CEither
+import arrow.core.Either
 import com.juangomez.common.Failure
 import com.juangomez.domain.models.Episode
 import com.juangomez.domain.repositories.EpisodeRepository
@@ -28,11 +28,11 @@ import org.koin.dsl.module
 class SeasonsEmptyCaseTest : BaseInstrumentationTest() {
 
     private val emptyEpisodeRepository = object : EpisodeRepository {
-        override suspend fun getEpisodes(): CEither<Failure, List<Episode>> =
-            CEither.Right(emptyList())
+        override suspend fun getEpisodes(): Either<Failure, List<Episode>> =
+            Either.Right(emptyList())
 
-        override suspend fun getEpisode(id: Int): CEither<Failure, Episode> =
-            CEither.Left(Failure.ServerError)
+        override suspend fun getEpisode(id: Int): Either<Failure, Episode> =
+            Either.Left(Failure.ServerError)
     }
 
     private val testModule = module {
