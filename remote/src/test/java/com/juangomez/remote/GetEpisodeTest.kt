@@ -1,6 +1,6 @@
 package com.juangomez.remote
 
-import com.juangomez.common.Either
+import com.juangomez.common.CEither
 import com.juangomez.common.Failure
 import com.juangomez.data.providers.remote.EpisodeRemoteProvider
 import com.juangomez.remote.models.RemoteEpisode
@@ -47,7 +47,7 @@ class GetEpisodeTest : BaseRemoteTest() {
         runBlocking {
             val response = episodeRemoteProvider.getEpisodeById(episodeId)
             assertEquals(
-                Either.Right(pojoResponse.toEpisode()),
+                CEither.Right(pojoResponse.toEpisode()),
                 response
             )
         }
@@ -65,7 +65,7 @@ class GetEpisodeTest : BaseRemoteTest() {
         runBlocking {
             val response = episodeRemoteProvider.getEpisodeById(episodeId)
             assertEquals(
-                Either.Left(Failure.ServerError),
+                CEither.Left(Failure.ServerError),
                 response
             )
         }

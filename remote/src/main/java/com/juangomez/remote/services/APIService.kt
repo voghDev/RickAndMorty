@@ -1,6 +1,6 @@
 package com.juangomez.remote.services
 
-import com.juangomez.common.Either
+import com.juangomez.common.CEither
 import com.juangomez.common.Failure
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -33,17 +33,17 @@ open class APIService<T> constructor(
             .build()
     }
 
-    suspend fun <R> execute(apiCall: suspend () -> R): Either<Failure, R> =
+    suspend fun <R> execute(apiCall: suspend () -> R): CEither<Failure, R> =
         try {
-            Either.Right(apiCall.invoke())
+            CEither.Right(apiCall.invoke())
         } catch (throwable: Throwable) {
             manageAPIError(throwable)
         }
 
-    private fun <R> manageAPIError(throwable: Throwable): Either<Failure, R> =
+    private fun <R> manageAPIError(throwable: Throwable): CEither<Failure, R> =
         when (throwable) {
-            is IOException -> Either.Left(Failure.NetworkConnection)
-            is HttpException -> Either.Left(Failure.ServerError)
-            else -> Either.Left(Failure.UnknownRemoteError)
+            is IOException -> CEither.Left(Failure.NetworkConnection)
+            is HttpException -> CEither.Left(Failure.ServerError)
+            else -> CEither.Left(Failure.UnknownRemoteError)
         }
 }

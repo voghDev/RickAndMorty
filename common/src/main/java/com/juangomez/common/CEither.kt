@@ -1,10 +1,10 @@
 package com.juangomez.common
 
-sealed class Either<out L : Failure, out R> {
+sealed class CEither<out L : Failure, out R> {
 
-    data class Left<out L : Failure>(val failure: L) : Either<L, Nothing>()
+    data class Left<out L : Failure>(val failure: L) : CEither<L, Nothing>()
 
-    data class Right<out R>(val data: R) : Either<Nothing, R>()
+    data class Right<out R>(val data: R) : CEither<Nothing, R>()
 
     val isRight get() = this is Right<R>
     val isLeft get() = this is Left<L>
@@ -24,10 +24,10 @@ fun <A, B, C> ((A) -> B).c(f: (B) -> C): (A) -> C = {
     f(this(it))
 }
 
-fun <T, L : Failure, R> Either<L, R>.flatMap(fn: (R) -> Either<L, T>): Either<L, T> =
+fun <T, L : Failure, R> CEither<L, R>.flatMap(fn: (R) -> CEither<L, T>): CEither<L, T> =
     when (this) {
-        is Either.Left -> Either.Left(failure)
-        is Either.Right -> fn(data)
+        is CEither.Left -> CEither.Left(failure)
+        is CEither.Right -> fn(data)
     }
 
-fun <T, L : Failure, R> Either<L, R>.map(fn: (R) -> (T)): Either<L, T> = this.flatMap(fn.c(::right))
+fun <T, L : Failure, R> CEither<L, R>.map(fn: (R) -> (T)): CEither<L, T> = this.flatMap(fn.c(::right))
