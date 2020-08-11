@@ -1,6 +1,6 @@
 package com.juangomez.data.repositories
 
-import com.juangomez.common.CEither
+import arrow.core.Either
 import com.juangomez.common.Failure
 import com.juangomez.data.providers.cache.EpisodeCacheProvider
 import com.juangomez.data.providers.remote.EpisodeRemoteProvider
@@ -34,7 +34,7 @@ class EpisodeRepositoryTest {
 
         episodeRepository = EpisodeRepositoryImpl(episodeRemoteProvider, episodeCacheProvider)
 
-        coEvery { episodeRemoteProvider.getEpisodes() } returns CEither.Right(episodes)
+        coEvery { episodeRemoteProvider.getEpisodes() } returns Either.Right(episodes)
         coEvery { episodeCacheProvider.setEpisodes(episodes) } returns Unit
         runBlocking { episodeRepository.getEpisodes() }
         coVerify(exactly = 1) { episodeRemoteProvider.getEpisodes() }
@@ -47,7 +47,7 @@ class EpisodeRepositoryTest {
 
         episodeRepository = EpisodeRepositoryImpl(episodeRemoteProvider, episodeCacheProvider)
 
-        coEvery { episodeRemoteProvider.getEpisodes() } returns CEither.Left(Failure.ServerError)
+        coEvery { episodeRemoteProvider.getEpisodes() } returns Either.Left(Failure.ServerError)
         runBlocking { episodeRepository.getEpisodes() }
         coVerify(exactly = 1) { episodeRemoteProvider.getEpisodes() }
         coVerify(exactly = 0) { episodeCacheProvider.setEpisodes(episodes) }
@@ -75,7 +75,7 @@ class EpisodeRepositoryTest {
         episodeRepository = EpisodeRepositoryImpl(episodeRemoteProvider, episodeCacheProvider)
 
         coEvery { episodeCacheProvider.getEpisodeById(episodeId) } returns null
-        coEvery { episodeRemoteProvider.getEpisodeById(episodeId) } returns CEither.Right(episode)
+        coEvery { episodeRemoteProvider.getEpisodeById(episodeId) } returns Either.Right(episode)
         coEvery { episodeCacheProvider.setEpisode(episode) } returns Unit
         runBlocking { episodeRepository.getEpisode(episodeId) }
         coVerify(exactly = 1) { episodeCacheProvider.getEpisodeById(episodeId) }
@@ -91,7 +91,7 @@ class EpisodeRepositoryTest {
         episodeRepository = EpisodeRepositoryImpl(episodeRemoteProvider, episodeCacheProvider)
 
         coEvery { episodeCacheProvider.getEpisodeById(episodeId) } returns null
-        coEvery { episodeRemoteProvider.getEpisodeById(episodeId) } returns CEither.Left(Failure.ServerError)
+        coEvery { episodeRemoteProvider.getEpisodeById(episodeId) } returns Either.Left(Failure.ServerError)
         coEvery { episodeCacheProvider.setEpisode(episode) } returns Unit
         runBlocking { episodeRepository.getEpisode(episodeId) }
         coVerify(exactly = 1) { episodeCacheProvider.getEpisodeById(episodeId) }

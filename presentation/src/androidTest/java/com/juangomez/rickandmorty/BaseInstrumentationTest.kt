@@ -16,8 +16,4 @@ open class BaseInstrumentationTest : KoinTest {
     open fun tearDown() {
         Intents.release()
     }
-
-    companion object {
-        private const val FINGERPRINT = "INSTRUMENTATION_TEST_DEMO_FINGERPRINT"
-    }
 }

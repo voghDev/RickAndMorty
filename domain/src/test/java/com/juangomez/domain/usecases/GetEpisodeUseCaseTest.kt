@@ -1,6 +1,6 @@
 package com.juangomez.domain.usecases
 
-import com.juangomez.common.CEither
+import arrow.core.Either
 import com.juangomez.domain.models.Episode
 import com.juangomez.domain.repositories.EpisodeRepository
 import io.mockk.MockKAnnotations
@@ -28,7 +28,7 @@ class GetEpisodeUseCaseTest {
         val episode = mockk<Episode>()
         getEpisodeUseCase = GetEpisodeUseCase(episodeRepository)
 
-        coEvery { episodeRepository.getEpisode(episodeId) } returns CEither.Right(episode)
+        coEvery { episodeRepository.getEpisode(episodeId) } returns Either.Right(episode)
         runBlocking { getEpisodeUseCase.invoke(this, GetEpisodeUseCase.Params(episodeId)) }
         coVerify(exactly = 1) { episodeRepository.getEpisode(episodeId) }
     }
