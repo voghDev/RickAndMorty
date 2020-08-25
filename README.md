@@ -11,6 +11,8 @@ Huge thanks to [Juan][2] for the original codebase to start
  - Added Continous Integration with [travis-ci][4]
  - Renamed Views
 
+![Screenshot](https://github.com/voghDev/RickAndMorty/screenshots/rickandmorty.gif)
+
 [1]: https://github.com/juan1393/RickAndMorty
 [2]: https://github.com/juan1393
 [3]: https://arrow-kt.io/
