@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/voghDev/RickAndMorty.svg?branch=master)](https://travis-ci.org/voghDev/RickAndMorty)
+
 # RickAndMorty
 Android app showing a Clean Architecture implementation using Rick and Morty API
 
