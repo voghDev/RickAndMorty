@@ -11,7 +11,7 @@ ext {
     def mockkVersion = '1.9.3'
     def timberVersion = '4.7.1'
     def appCompatVersion = '1.1.0'
-    def constraintlayoutVersion = '2.0.0-beta4'
+    def constraintlayoutVersion = '2.0.0'
     def recyclerviewVersion = '1.1.0'
     def koinVersion = '2.0.1'
     def lifecycleVersion = '2.2.0'
