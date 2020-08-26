@@ -8,7 +8,7 @@ ext {
     def okhttpVersion = '3.14.7'
     def gsonVersion = '2.8.6'
     def junitVersion = '4.12'
-    def mockkVersion = '1.9.2'
+    def mockkVersion = '1.10.0'
     def timberVersion = '4.7.1'
     def appCompatVersion = '1.1.0'
     def constraintlayoutVersion = '2.0.0'
@@ -68,7 +68,7 @@ ext {
     ]
 
     mockk = [
-            mockk: "io.mockk:mockk:${mockkVersion}"
+            mockk: "io.mockk:mockk-android:${mockkVersion}"
     ]
 
     timber = [
