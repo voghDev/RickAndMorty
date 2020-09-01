@@ -1,7 +1,7 @@
 ext {
     def androidPluginVersion = '3.5.0'
     def mavenPluginVersion = '2.0'
-    def kotlinVersion = '1.3.61'
+    def kotlinVersion = '1.4.0'
 
     def coroutinesVersion = '1.3.5'
     def retrofitVersion = '2.8.1'
@@ -11,11 +11,11 @@ ext {
     def mockkVersion = '1.10.0'
     def timberVersion = '4.7.1'
     def appCompatVersion = '1.1.0'
-    def constraintlayoutVersion = '2.0.0'
+    def constraintlayoutVersion = '2.0.1'
     def recyclerviewVersion = '1.1.0'
     def koinVersion = '2.0.1'
     def lifecycleVersion = '2.2.0'
-    def materialDialogsVersion = '3.1.1'
+    def materialDialogsVersion = '3.3.0'
     def arrowVersion = '0.10.5'
 
     def androidxTestVersion = "1.2.0"
@@ -24,7 +24,7 @@ ext {
 
     def archVersion = "2.0.0"
 
-    def ktxVersion = "1.0.0"
+    def ktxVersion = "1.3.1"
     def espressoVersion = "3.2.0"
     def appCenterVersion = "3.0.0"
     def appCenterEspressoVersion = "1.4"
