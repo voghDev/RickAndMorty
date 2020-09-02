@@ -9,7 +9,15 @@ class RemoteEpisodeTest {
     @Test
     fun `should get a valid date from air date string`() {
         val airDate = "December 13, 2019"
-        val episode = RemoteEpisode(1, "", airDate, "", listOf(), "", "")
+        val episode = RemoteEpisode(
+            1,
+            name = "",
+            airDate,
+            episode = "",
+            characters = emptyList(),
+            url = "",
+            created = ""
+        )
 
         val expectedDate = GregorianCalendar(2019, Calendar.DECEMBER, 13).time
         val episodeAirDate = episode.airDateStringToDate()
@@ -20,7 +28,15 @@ class RemoteEpisodeTest {
     @Test
     fun `should get a valid season number from episode string`() {
         val episodeUrl = "S01E25"
-        val episode = RemoteEpisode(1, "", "", episodeUrl, listOf(), "", "")
+        val episode = RemoteEpisode(
+            1,
+            name = "",
+            airDate = "",
+            episodeUrl,
+            characters = emptyList(),
+            url = "",
+            created = ""
+        )
 
         val expectedSeason = 1
         val episodeSeason = episode.getSeasonNumber()
@@ -31,7 +47,15 @@ class RemoteEpisodeTest {
     @Test
     fun `should get a valid episode number from episode string`() {
         val episodeUrl = "S01E25"
-        val episode = RemoteEpisode(1, "", "", episodeUrl, listOf(), "", "")
+        val episode = RemoteEpisode(
+            1,
+            name = "",
+            airDate = "",
+            episodeUrl,
+            characters = emptyList(),
+            url = "",
+            created = ""
+        )
 
         val expectedSeason = 25
         val episodeSeason = episode.getEpisodeNumber()
@@ -45,7 +69,15 @@ class RemoteEpisodeTest {
             "https://rickandmortyapi.com/api/character/1",
             "https://rickandmortyapi.com/api/character/2"
         )
-        val episode = RemoteEpisode(1, "", "", "", characterIds, "", "")
+        val episode = RemoteEpisode(
+            1,
+            name = "",
+            airDate = "",
+            episode = "",
+            characterIds,
+            url = "",
+            created = ""
+        )
 
         val expectedCharacterIds = listOf(1, 2)
         val episodeCharacterIds = episode.getCharacterIds()
