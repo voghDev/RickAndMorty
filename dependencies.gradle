@@ -68,7 +68,7 @@ ext {
     ]
 
     mockk = [
-            mockk: "io.mockk:mockk-android:${mockkVersion}"
+            mockk: "io.mockk:mockk:${mockkVersion}"
     ]
 
     timber = [
