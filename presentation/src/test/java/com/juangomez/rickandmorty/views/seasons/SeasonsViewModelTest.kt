@@ -2,9 +2,9 @@ package com.juangomez.rickandmorty.views.seasons
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.juangomez.domain.usecases.GetSeasonsUseCase
+import com.juangomez.rickandmorty.views.base.BaseViewModel
 import io.mockk.MockKAnnotations
 import io.mockk.mockk
-import junit.framework.Assert.assertNotNull
 import junit.framework.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
@@ -25,6 +25,8 @@ class SeasonsViewModelTest {
 
         viewModel.initialState()
 
-        assertTrue(viewModel.state.value is SeasonsViewModel.State.Loading)
+        assertTrue(viewModel.state() is SeasonsViewModel.State.Loading)
     }
+
+    private fun BaseViewModel.state() = this.state.value
 }
