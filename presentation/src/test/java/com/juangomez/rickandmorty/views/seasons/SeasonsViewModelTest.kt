@@ -5,6 +5,7 @@ import com.juangomez.domain.usecases.GetSeasonsUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.mockk
 import junit.framework.Assert.assertNotNull
+import junit.framework.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -19,11 +20,11 @@ class SeasonsViewModelTest {
     fun setup() = MockKAnnotations.init(this)
 
     @Test
-    fun `should be able to init a view model without errors`() {
+    fun `should transact to Loading state when ViewModel is initialized`() {
         val viewModel = SeasonsViewModel(mockUseCase)
 
         viewModel.initialState()
 
-        assertNotNull(viewModel)
+        assertTrue(viewModel.state.value is SeasonsViewModel.State.Loading)
     }
 }
