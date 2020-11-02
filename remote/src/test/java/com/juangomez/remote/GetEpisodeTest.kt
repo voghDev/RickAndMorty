@@ -2,12 +2,12 @@ package com.juangomez.remote
 
 import arrow.core.Either
 import com.juangomez.common.Failure
-import com.juangomez.data.providers.remote.EpisodeRemoteProvider
+import com.juangomez.data.providers.remote.EpisodeRemoteDataSource
 import com.juangomez.remote.models.RemoteEpisode
 import com.juangomez.remote.models.toEpisode
 import com.juangomez.remote.services.APIService
 import com.juangomez.remote.services.episodes.EpisodeAPIService
-import com.juangomez.remote.services.episodes.EpisodeRemoteProviderImpl
+import com.juangomez.remote.services.episodes.EpisodeRemoteDataSourceImpl
 import com.juangomez.remote.util.JSONFile
 import com.juangomez.remote.util.pojo
 import com.juangomez.remote.util.string
@@ -18,11 +18,11 @@ import org.junit.Test
 
 class GetEpisodeTest : BaseRemoteTest() {
 
-    private lateinit var episodeRemoteProvider: EpisodeRemoteProvider
+    private lateinit var episodeRemoteDataSource: EpisodeRemoteDataSource
 
     override fun setup() {
         super.setup()
-        episodeRemoteProvider = EpisodeRemoteProviderImpl(
+        episodeRemoteDataSource = EpisodeRemoteDataSourceImpl(
             APIService(
                 EpisodeAPIService::class.java,
                 BASE_URL,
@@ -45,7 +45,7 @@ class GetEpisodeTest : BaseRemoteTest() {
         )
 
         runBlocking {
-            val response = episodeRemoteProvider.getEpisodeById(episodeId)
+            val response = episodeRemoteDataSource.getEpisodeById(episodeId)
             assertEquals(
                 Either.Right(pojoResponse.toEpisode()),
                 response
@@ -63,7 +63,7 @@ class GetEpisodeTest : BaseRemoteTest() {
         )
 
         runBlocking {
-            val response = episodeRemoteProvider.getEpisodeById(episodeId)
+            val response = episodeRemoteDataSource.getEpisodeById(episodeId)
             assertEquals(
                 Either.Left(Failure.ServerError),
                 response

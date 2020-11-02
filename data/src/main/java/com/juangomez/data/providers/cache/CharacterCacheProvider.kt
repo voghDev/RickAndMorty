@@ -2,7 +2,7 @@ package com.juangomez.data.providers.cache
 
 import com.juangomez.domain.models.Character
 
-interface CharacterCacheProvider {
+interface CharacterCacheDataSource {
 
     fun getCharactersById(ids: List<Int>): List<Character>
 

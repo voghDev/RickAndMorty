@@ -1,33 +1,33 @@
 package com.juangomez.cache
 
-import com.juangomez.data.providers.cache.EpisodeCacheProvider
+import com.juangomez.data.providers.cache.EpisodeCacheDataSource
 import com.juangomez.domain.models.Episode
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import java.util.*
 
-class EpisodeCacheProviderTest {
+class EpisodeCacheDataSourceTest {
 
-    private lateinit var episodeCacheProvider: EpisodeCacheProvider
+    private lateinit var episodeCacheDataSource: EpisodeCacheDataSource
     private lateinit var episodes: List<Episode>
 
     @Before
     fun setup() {
-        episodeCacheProvider = EpisodeCacheProviderImpl()
+        episodeCacheDataSource = EpisodeCacheDataSourceImpl()
         episodes = populateEpisodeCache()
     }
 
     @Test
     fun `should store a list of episodes and get the same list`() {
-        assertEquals(episodes, episodeCacheProvider.getEpisodes())
+        assertEquals(episodes, episodeCacheDataSource.getEpisodes())
     }
 
     @Test
     fun `should get a episode by id`() {
         val episodeToFind = episodes.last()
 
-        assertEquals(episodeToFind, episodeCacheProvider.getEpisodeById(episodeToFind.id))
+        assertEquals(episodeToFind, episodeCacheDataSource.getEpisodeById(episodeToFind.id))
     }
 
     @Test
@@ -35,9 +35,9 @@ class EpisodeCacheProviderTest {
         val episodeToSet = episodes.last()
         val expectedEpisodes = episodes.toList()
 
-        episodeCacheProvider.setEpisode(episodeToSet)
+        episodeCacheDataSource.setEpisode(episodeToSet)
 
-        assertEquals(expectedEpisodes,  episodeCacheProvider.getEpisodes())
+        assertEquals(expectedEpisodes,  episodeCacheDataSource.getEpisodes())
     }
 
     @Test
@@ -45,9 +45,9 @@ class EpisodeCacheProviderTest {
         val episodeToSet = Episode(8547, "Sample 4", Date(), 4, 1, listOf())
         val expectedEpisodes = episodes.union(listOf(episodeToSet)).toList()
 
-        episodeCacheProvider.setEpisode(episodeToSet)
+        episodeCacheDataSource.setEpisode(episodeToSet)
 
-        assertEquals(expectedEpisodes, episodeCacheProvider.getEpisodes())
+        assertEquals(expectedEpisodes, episodeCacheDataSource.getEpisodes())
     }
 
     private fun populateEpisodeCache(): List<Episode> {
@@ -57,7 +57,7 @@ class EpisodeCacheProviderTest {
             Episode(1567, "Sample 3", Date(), 3, 1, listOf())
         )
 
-        episodeCacheProvider.setEpisodes(episodes)
+        episodeCacheDataSource.setEpisodes(episodes)
         return episodes
     }
 }

@@ -1,9 +1,9 @@
 package com.juangomez.cache
 
-import com.juangomez.data.providers.cache.EpisodeCacheProvider
+import com.juangomez.data.providers.cache.EpisodeCacheDataSource
 import com.juangomez.domain.models.Episode
 
-class EpisodeCacheProviderImpl : EpisodeCacheProvider {
+class EpisodeCacheDataSourceImpl : EpisodeCacheDataSource {
 
     private var episodes = mutableListOf<Episode>()
 

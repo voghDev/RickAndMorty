@@ -2,12 +2,12 @@ package com.juangomez.remote
 
 import arrow.core.Either
 import com.juangomez.common.Failure
-import com.juangomez.data.providers.remote.CharacterRemoteProvider
+import com.juangomez.data.providers.remote.CharacterRemoteDataSource
 import com.juangomez.remote.models.RemoteCharacter
 import com.juangomez.remote.models.toCharacters
 import com.juangomez.remote.services.APIService
 import com.juangomez.remote.services.characters.CharacterAPIService
-import com.juangomez.remote.services.characters.CharacterRemoteProviderImpl
+import com.juangomez.remote.services.characters.CharacterRemoteDataSourceImpl
 import com.juangomez.remote.util.JSONFile
 import com.juangomez.remote.util.pojoList
 import com.juangomez.remote.util.string
@@ -18,11 +18,11 @@ import org.junit.Test
 
 class GetCharactersTest : BaseRemoteTest() {
 
-    private lateinit var charactersRemoteProvider: CharacterRemoteProvider
+    private lateinit var charactersRemoteDataSource: CharacterRemoteDataSource
 
     override fun setup() {
         super.setup()
-        charactersRemoteProvider = CharacterRemoteProviderImpl(
+        charactersRemoteDataSource = CharacterRemoteDataSourceImpl(
             APIService(
                 CharacterAPIService::class.java,
                 BASE_URL,
@@ -45,7 +45,7 @@ class GetCharactersTest : BaseRemoteTest() {
         )
 
         runBlocking {
-            val response = charactersRemoteProvider.getCharactersById(charactersId)
+            val response = charactersRemoteDataSource.getCharactersById(charactersId)
             assertEquals(
                 Either.Right(pojoResponse.toCharacters()),
                 response
@@ -63,7 +63,7 @@ class GetCharactersTest : BaseRemoteTest() {
         )
 
         runBlocking {
-            val response = charactersRemoteProvider.getCharactersById(charactersId)
+            val response = charactersRemoteDataSource.getCharactersById(charactersId)
             assertEquals(
                 Either.Left(Failure.ServerError),
                 response

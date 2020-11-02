@@ -2,8 +2,8 @@ package com.juangomez.data.repositories
 
 import arrow.core.Either
 import com.juangomez.common.Failure
-import com.juangomez.data.providers.cache.EpisodeCacheProvider
-import com.juangomez.data.providers.remote.EpisodeRemoteProvider
+import com.juangomez.data.providers.cache.EpisodeCacheDataSource
+import com.juangomez.data.providers.remote.EpisodeRemoteDataSource
 import com.juangomez.domain.models.Episode
 import com.juangomez.domain.repositories.EpisodeRepository
 import io.mockk.MockKAnnotations
@@ -20,10 +20,10 @@ class EpisodeRepositoryTest {
     private lateinit var episodeRepository: EpisodeRepository
 
     @MockK
-    private lateinit var episodeRemoteProvider: EpisodeRemoteProvider
+    private lateinit var episodeRemoteDataSource: EpisodeRemoteDataSource
 
     @MockK
-    private lateinit var episodeCacheProvider: EpisodeCacheProvider
+    private lateinit var episodeCacheDataSource: EpisodeCacheDataSource
 
     @Before
     fun setup() = MockKAnnotations.init(this)
@@ -32,25 +32,25 @@ class EpisodeRepositoryTest {
     fun `should call to remote and cache providers when get episodes and get a successful response`() {
         val episodes = mockk<List<Episode>>()
 
-        episodeRepository = EpisodeRepositoryImpl(episodeRemoteProvider, episodeCacheProvider)
+        episodeRepository = EpisodeRepositoryImpl(episodeRemoteDataSource, episodeCacheDataSource)
 
-        coEvery { episodeRemoteProvider.getEpisodes() } returns Either.Right(episodes)
-        coEvery { episodeCacheProvider.setEpisodes(episodes) } returns Unit
+        coEvery { episodeRemoteDataSource.getEpisodes() } returns Either.Right(episodes)
+        coEvery { episodeCacheDataSource.setEpisodes(episodes) } returns Unit
         runBlocking { episodeRepository.getEpisodes() }
-        coVerify(exactly = 1) { episodeRemoteProvider.getEpisodes() }
-        coVerify(exactly = 1) { episodeCacheProvider.setEpisodes(episodes) }
+        coVerify(exactly = 1) { episodeRemoteDataSource.getEpisodes() }
+        coVerify(exactly = 1) { episodeCacheDataSource.setEpisodes(episodes) }
     }
 
     @Test
     fun `should call to remote provider when get episodes and get a failed response`() {
         val episodes = mockk<List<Episode>>()
 
-        episodeRepository = EpisodeRepositoryImpl(episodeRemoteProvider, episodeCacheProvider)
+        episodeRepository = EpisodeRepositoryImpl(episodeRemoteDataSource, episodeCacheDataSource)
 
-        coEvery { episodeRemoteProvider.getEpisodes() } returns Either.Left(Failure.ServerError)
+        coEvery { episodeRemoteDataSource.getEpisodes() } returns Either.Left(Failure.ServerError)
         runBlocking { episodeRepository.getEpisodes() }
-        coVerify(exactly = 1) { episodeRemoteProvider.getEpisodes() }
-        coVerify(exactly = 0) { episodeCacheProvider.setEpisodes(episodes) }
+        coVerify(exactly = 1) { episodeRemoteDataSource.getEpisodes() }
+        coVerify(exactly = 0) { episodeCacheDataSource.setEpisodes(episodes) }
     }
 
     @Test
@@ -58,13 +58,13 @@ class EpisodeRepositoryTest {
         val episodeId = 1
         val episode = mockk<Episode>()
 
-        episodeRepository = EpisodeRepositoryImpl(episodeRemoteProvider, episodeCacheProvider)
+        episodeRepository = EpisodeRepositoryImpl(episodeRemoteDataSource, episodeCacheDataSource)
 
-        coEvery { episodeCacheProvider.getEpisodeById(episodeId) } returns episode
+        coEvery { episodeCacheDataSource.getEpisodeById(episodeId) } returns episode
         runBlocking { episodeRepository.getEpisode(episodeId) }
-        coVerify(exactly = 1) { episodeCacheProvider.getEpisodeById(episodeId) }
-        coVerify(exactly = 0) { episodeRemoteProvider.getEpisodeById(episodeId) }
-        coVerify(exactly = 0) { episodeCacheProvider.setEpisode(episode) }
+        coVerify(exactly = 1) { episodeCacheDataSource.getEpisodeById(episodeId) }
+        coVerify(exactly = 0) { episodeRemoteDataSource.getEpisodeById(episodeId) }
+        coVerify(exactly = 0) { episodeCacheDataSource.setEpisode(episode) }
     }
 
     @Test
@@ -72,15 +72,15 @@ class EpisodeRepositoryTest {
         val episodeId = 1
         val episode = mockk<Episode>()
 
-        episodeRepository = EpisodeRepositoryImpl(episodeRemoteProvider, episodeCacheProvider)
+        episodeRepository = EpisodeRepositoryImpl(episodeRemoteDataSource, episodeCacheDataSource)
 
-        coEvery { episodeCacheProvider.getEpisodeById(episodeId) } returns null
-        coEvery { episodeRemoteProvider.getEpisodeById(episodeId) } returns Either.Right(episode)
-        coEvery { episodeCacheProvider.setEpisode(episode) } returns Unit
+        coEvery { episodeCacheDataSource.getEpisodeById(episodeId) } returns null
+        coEvery { episodeRemoteDataSource.getEpisodeById(episodeId) } returns Either.Right(episode)
+        coEvery { episodeCacheDataSource.setEpisode(episode) } returns Unit
         runBlocking { episodeRepository.getEpisode(episodeId) }
-        coVerify(exactly = 1) { episodeCacheProvider.getEpisodeById(episodeId) }
-        coVerify(exactly = 1) { episodeRemoteProvider.getEpisodeById(episodeId) }
-        coVerify(exactly = 1) { episodeCacheProvider.setEpisode(episode) }
+        coVerify(exactly = 1) { episodeCacheDataSource.getEpisodeById(episodeId) }
+        coVerify(exactly = 1) { episodeRemoteDataSource.getEpisodeById(episodeId) }
+        coVerify(exactly = 1) { episodeCacheDataSource.setEpisode(episode) }
     }
 
     @Test
@@ -88,14 +88,14 @@ class EpisodeRepositoryTest {
         val episodeId = 1
         val episode = mockk<Episode>()
 
-        episodeRepository = EpisodeRepositoryImpl(episodeRemoteProvider, episodeCacheProvider)
+        episodeRepository = EpisodeRepositoryImpl(episodeRemoteDataSource, episodeCacheDataSource)
 
-        coEvery { episodeCacheProvider.getEpisodeById(episodeId) } returns null
-        coEvery { episodeRemoteProvider.getEpisodeById(episodeId) } returns Either.Left(Failure.ServerError)
-        coEvery { episodeCacheProvider.setEpisode(episode) } returns Unit
+        coEvery { episodeCacheDataSource.getEpisodeById(episodeId) } returns null
+        coEvery { episodeRemoteDataSource.getEpisodeById(episodeId) } returns Either.Left(Failure.ServerError)
+        coEvery { episodeCacheDataSource.setEpisode(episode) } returns Unit
         runBlocking { episodeRepository.getEpisode(episodeId) }
-        coVerify(exactly = 1) { episodeCacheProvider.getEpisodeById(episodeId) }
-        coVerify(exactly = 1) { episodeRemoteProvider.getEpisodeById(episodeId) }
-        coVerify(exactly = 0) { episodeCacheProvider.setEpisode(episode) }
+        coVerify(exactly = 1) { episodeCacheDataSource.getEpisodeById(episodeId) }
+        coVerify(exactly = 1) { episodeRemoteDataSource.getEpisodeById(episodeId) }
+        coVerify(exactly = 0) { episodeCacheDataSource.setEpisode(episode) }
     }
 }

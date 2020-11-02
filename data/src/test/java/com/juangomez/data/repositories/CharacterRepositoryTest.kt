@@ -2,8 +2,8 @@ package com.juangomez.data.repositories
 
 import arrow.core.Either
 import com.juangomez.common.Failure
-import com.juangomez.data.providers.cache.CharacterCacheProvider
-import com.juangomez.data.providers.remote.CharacterRemoteProvider
+import com.juangomez.data.providers.cache.CharacterCacheDataSource
+import com.juangomez.data.providers.remote.CharacterRemoteDataSource
 import com.juangomez.domain.models.Character
 import com.juangomez.domain.models.SummaryLocation
 import com.juangomez.domain.repositories.CharacterRepository
@@ -21,10 +21,10 @@ class CharacterRepositoryTest {
     private lateinit var characterRepository: CharacterRepository
 
     @MockK
-    private lateinit var characterRemoteProvider: CharacterRemoteProvider
+    private lateinit var characterRemoteDataSource: CharacterRemoteDataSource
 
     @MockK
-    private lateinit var characterCacheProvider: CharacterCacheProvider
+    private lateinit var characterCacheDataSource: CharacterCacheDataSource
 
     @Before
     fun setup() = MockKAnnotations.init(this)
@@ -38,12 +38,12 @@ class CharacterRepositoryTest {
             Character(183, "Sample 2", "", "", "", "", summaryLocation, summaryLocation, "", listOf())
         )
 
-        characterRepository = CharacterRepositoryImpl(characterRemoteProvider, characterCacheProvider)
+        characterRepository = CharacterRepositoryImpl(characterRemoteDataSource, characterCacheDataSource)
 
-        coEvery { characterCacheProvider.getCharactersById(characterIds) } returns characters
+        coEvery { characterCacheDataSource.getCharactersById(characterIds) } returns characters
         runBlocking { characterRepository.getCharactersById(characterIds) }
-        coVerify(exactly = 1) { characterCacheProvider.getCharactersById(characterIds) }
-        coVerify(exactly = 0) { characterRemoteProvider.getCharactersById(characterIds) }
+        coVerify(exactly = 1) { characterCacheDataSource.getCharactersById(characterIds) }
+        coVerify(exactly = 0) { characterRemoteDataSource.getCharactersById(characterIds) }
     }
 
     @Test
@@ -52,15 +52,15 @@ class CharacterRepositoryTest {
         val emptyCharactersList = emptyList<Character>()
         val characters = mockk<List<Character>>()
 
-        characterRepository = CharacterRepositoryImpl(characterRemoteProvider, characterCacheProvider)
+        characterRepository = CharacterRepositoryImpl(characterRemoteDataSource, characterCacheDataSource)
 
-        coEvery { characterCacheProvider.getCharactersById(characterIds) } returns emptyCharactersList
-        coEvery { characterRemoteProvider.getCharactersById(characterIds) } returns Either.Right(characters)
-        coEvery { characterCacheProvider.setCharacters(characters) } returns Unit
+        coEvery { characterCacheDataSource.getCharactersById(characterIds) } returns emptyCharactersList
+        coEvery { characterRemoteDataSource.getCharactersById(characterIds) } returns Either.Right(characters)
+        coEvery { characterCacheDataSource.setCharacters(characters) } returns Unit
         runBlocking { characterRepository.getCharactersById(characterIds) }
-        coVerify(exactly = 1) { characterCacheProvider.getCharactersById(characterIds) }
-        coVerify(exactly = 1) { characterRemoteProvider.getCharactersById(characterIds) }
-        coVerify(exactly = 1) { characterCacheProvider.setCharacters(characters) }
+        coVerify(exactly = 1) { characterCacheDataSource.getCharactersById(characterIds) }
+        coVerify(exactly = 1) { characterRemoteDataSource.getCharactersById(characterIds) }
+        coVerify(exactly = 1) { characterCacheDataSource.setCharacters(characters) }
     }
 
     @Test
@@ -69,14 +69,14 @@ class CharacterRepositoryTest {
         val emptyCharactersList = emptyList<Character>()
         val characters = mockk<List<Character>>()
 
-        characterRepository = CharacterRepositoryImpl(characterRemoteProvider, characterCacheProvider)
+        characterRepository = CharacterRepositoryImpl(characterRemoteDataSource, characterCacheDataSource)
 
-        coEvery { characterCacheProvider.getCharactersById(characterIds) } returns emptyCharactersList
-        coEvery { characterRemoteProvider.getCharactersById(characterIds) } returns Either.Left(Failure.ServerError)
-        coEvery { characterCacheProvider.setCharacters(characters) } returns Unit
+        coEvery { characterCacheDataSource.getCharactersById(characterIds) } returns emptyCharactersList
+        coEvery { characterRemoteDataSource.getCharactersById(characterIds) } returns Either.Left(Failure.ServerError)
+        coEvery { characterCacheDataSource.setCharacters(characters) } returns Unit
         runBlocking { characterRepository.getCharactersById(characterIds) }
-        coVerify(exactly = 1) { characterCacheProvider.getCharactersById(characterIds) }
-        coVerify(exactly = 1) { characterRemoteProvider.getCharactersById(characterIds) }
-        coVerify(exactly = 0) { characterCacheProvider.setCharacters(characters) }
+        coVerify(exactly = 1) { characterCacheDataSource.getCharactersById(characterIds) }
+        coVerify(exactly = 1) { characterRemoteDataSource.getCharactersById(characterIds) }
+        coVerify(exactly = 0) { characterCacheDataSource.setCharacters(characters) }
     }
 }

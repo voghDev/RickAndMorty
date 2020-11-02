@@ -1,12 +1,12 @@
 package com.juangomez.rickandmorty.di
 
 import com.google.gson.Gson
-import com.juangomez.cache.CharacterCacheProviderImpl
-import com.juangomez.cache.EpisodeCacheProviderImpl
-import com.juangomez.data.providers.cache.CharacterCacheProvider
-import com.juangomez.data.providers.cache.EpisodeCacheProvider
-import com.juangomez.data.providers.remote.CharacterRemoteProvider
-import com.juangomez.data.providers.remote.EpisodeRemoteProvider
+import com.juangomez.cache.CharacterCacheDataSourceImpl
+import com.juangomez.cache.EpisodeCacheDataSourceImpl
+import com.juangomez.data.providers.cache.CharacterCacheDataSource
+import com.juangomez.data.providers.cache.EpisodeCacheDataSource
+import com.juangomez.data.providers.remote.CharacterRemoteDataSource
+import com.juangomez.data.providers.remote.EpisodeRemoteDataSource
 import com.juangomez.data.repositories.CharacterRepositoryImpl
 import com.juangomez.data.repositories.EpisodeRepositoryImpl
 import com.juangomez.domain.repositories.CharacterRepository
@@ -16,9 +16,9 @@ import com.juangomez.domain.usecases.GetEpisodeUseCase
 import com.juangomez.domain.usecases.GetSeasonsUseCase
 import com.juangomez.remote.services.APIService
 import com.juangomez.remote.services.characters.CharacterAPIService
-import com.juangomez.remote.services.characters.CharacterRemoteProviderImpl
+import com.juangomez.remote.services.characters.CharacterRemoteDataSourceImpl
 import com.juangomez.remote.services.episodes.EpisodeAPIService
-import com.juangomez.remote.services.episodes.EpisodeRemoteProviderImpl
+import com.juangomez.remote.services.episodes.EpisodeRemoteDataSourceImpl
 import com.juangomez.rickandmorty.BuildConfig.BASE_URL
 import com.juangomez.rickandmorty.BuildConfig.DEBUG
 import com.juangomez.rickandmorty.views.seasons.SeasonsViewModel
@@ -66,15 +66,15 @@ val remoteModule = module {
         )
     }
 
-    single { EpisodeRemoteProviderImpl(get(named(EPISODE_API_SERVICE))) as EpisodeRemoteProvider }
+    single { EpisodeRemoteDataSourceImpl(get(named(EPISODE_API_SERVICE))) as EpisodeRemoteDataSource }
 
-    single { CharacterRemoteProviderImpl(get(named(CHARACTER_API_SERVICE))) as CharacterRemoteProvider }
+    single { CharacterRemoteDataSourceImpl(get(named(CHARACTER_API_SERVICE))) as CharacterRemoteDataSource }
 }
 
 val cacheModule = module {
-    single { EpisodeCacheProviderImpl() as EpisodeCacheProvider }
+    single { EpisodeCacheDataSourceImpl() as EpisodeCacheDataSource }
 
-    single { CharacterCacheProviderImpl() as CharacterCacheProvider }
+    single { CharacterCacheDataSourceImpl() as CharacterCacheDataSource }
 }
 
 val dataModule = module {

@@ -4,7 +4,7 @@ import arrow.core.Either
 import com.juangomez.common.Failure
 import com.juangomez.domain.models.Episode
 
-interface EpisodeRemoteProvider {
+interface EpisodeRemoteDataSource {
 
     suspend fun getEpisodes(): Either<Failure, List<Episode>>
 

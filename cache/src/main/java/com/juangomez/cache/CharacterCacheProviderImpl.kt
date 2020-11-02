@@ -1,9 +1,9 @@
 package com.juangomez.cache
 
-import com.juangomez.data.providers.cache.CharacterCacheProvider
+import com.juangomez.data.providers.cache.CharacterCacheDataSource
 import com.juangomez.domain.models.Character
 
-class CharacterCacheProviderImpl: CharacterCacheProvider {
+class CharacterCacheDataSourceImpl: CharacterCacheDataSource {
 
     private var characters = mutableListOf<Character>()
 
