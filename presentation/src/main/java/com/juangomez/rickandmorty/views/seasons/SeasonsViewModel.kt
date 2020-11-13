@@ -6,8 +6,11 @@ import com.juangomez.rickandmorty.views.base.BaseViewModel
 import androidx.lifecycle.viewModelScope
 import com.juangomez.domain.models.Season
 import com.juangomez.domain.usecases.BaseUseCase
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class SeasonsViewModel(private val getSeasonsUseCase: GetSeasonsUseCase) : BaseViewModel() {
+
+    var stateFlow = MutableStateFlow<State>(State.Loading)
 
     sealed class State : BaseViewModel.State() {
         object Loading : State()
@@ -24,6 +27,7 @@ class SeasonsViewModel(private val getSeasonsUseCase: GetSeasonsUseCase) : BaseV
 
     override fun initialState() {
         viewState.value = State.Loading
+        stateFlow.value = State.Loading
     }
 
     fun getSeasons() {
@@ -34,6 +38,7 @@ class SeasonsViewModel(private val getSeasonsUseCase: GetSeasonsUseCase) : BaseV
 
     fun retryUseCase(useCase: UseCase) {
         viewState.value = State.Loading
+        stateFlow.value = State.Loading
         when (useCase) {
             UseCase.GET_SEASONS -> getSeasons()
         }
@@ -41,14 +46,17 @@ class SeasonsViewModel(private val getSeasonsUseCase: GetSeasonsUseCase) : BaseV
 
     fun onSeasonSelected(season: Season) {
         viewState.value = State.SeasonSelected(season)
+        stateFlow.value = State.SeasonSelected(season)
     }
 
     private fun handleGetSeasonError(failure: Failure) {
         viewState.value = State.Error(failure, UseCase.GET_SEASONS)
+        stateFlow.value = State.Error(failure, UseCase.GET_SEASONS)
     }
 
     private fun handleGetSeasonsSuccess(seasons: List<Season>) {
         this.seasons = seasons
         viewState.value = State.SeasonsLoaded(seasons)
+        stateFlow.value = State.SeasonsLoaded(seasons)
     }
 }

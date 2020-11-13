@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.juangomez.domain.models.Season
@@ -14,6 +15,10 @@ import com.juangomez.rickandmorty.R
 import com.juangomez.rickandmorty.common.visible
 import com.juangomez.rickandmorty.views.seasons.adapter.EpisodesAdapter
 import kotlinx.android.synthetic.main.seasons_activity.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.subscribe
 
 class SeasonsActivity : BaseActivity() {
 
@@ -23,7 +28,8 @@ class SeasonsActivity : BaseActivity() {
     private lateinit var episodesAdapter: EpisodesAdapter
 
     override fun setupObservers() {
-        viewModel.state.observe(this, Observer { manageState(it) })
+//        viewModel.state.observe(this, Observer { manageState(it) })
+        viewModel.stateFlow.onEach { manageState(it) }.launchIn(viewModel.viewModelScope)
     }
 
     override fun manageState(state: BaseViewModel.State) {
