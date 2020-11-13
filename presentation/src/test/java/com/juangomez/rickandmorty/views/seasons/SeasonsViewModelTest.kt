@@ -23,7 +23,7 @@ class SeasonsViewModelTest {
     fun `should transact to Loading state when ViewModel is initialized`() {
         val viewModel = SeasonsViewModel(mockUseCase)
 
-        viewModel.initialState()
+        viewModel.init()
 
         assertTrue(viewModel.state() is SeasonsViewModel.State.Loading)
     }

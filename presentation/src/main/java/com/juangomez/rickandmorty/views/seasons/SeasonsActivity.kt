@@ -28,8 +28,7 @@ class SeasonsActivity : BaseActivity() {
     private lateinit var episodesAdapter: EpisodesAdapter
 
     override fun setupObservers() {
-//        viewModel.state.observe(this, Observer { manageState(it) })
-        viewModel.stateFlow.onEach { manageState(it) }.launchIn(viewModel.viewModelScope)
+        viewModel.state.onEach { manageState(it) }
     }
 
     override fun manageState(state: BaseViewModel.State) {

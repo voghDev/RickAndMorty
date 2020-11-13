@@ -17,7 +17,7 @@ abstract class BaseActivity : AppCompatActivity() {
         setContentView(layoutId)
         setupObservers()
         prepare(intent)
-        viewModel.initialState()
+        viewModel.init()
     }
 
     open fun prepare(intent: Intent?) {}
