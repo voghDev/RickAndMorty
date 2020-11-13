@@ -24,7 +24,7 @@ class EpisodeCacheProviderTest {
     }
 
     @Test
-    fun `should get a episode by id`() {
+    fun `should get an episode by id`() {
         val episodeToFind = episodes.last()
 
         assertEquals(episodeToFind, episodeCacheProvider.getEpisodeById(episodeToFind.id))
