@@ -24,9 +24,11 @@ class SeasonsViewModel(private val getSeasonsUseCase: GetSeasonsUseCase) : BaseV
 
     override fun initialState() {
         viewState.value = State.Loading
+
+        getSeasons()
     }
 
-    fun getSeasons() {
+    private fun getSeasons() {
         getSeasonsUseCase.invoke(viewModelScope, BaseUseCase.None()) {
             it.fold(::handleGetSeasonError, ::handleGetSeasonsSuccess)
         }

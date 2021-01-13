@@ -30,7 +30,6 @@ class SeasonsActivity : BaseActivity() {
         when (state) {
             is SeasonsViewModel.State.Loading -> {
                 showLoading()
-                viewModel.getSeasons()
             }
             is SeasonsViewModel.State.Error -> {
                 hideLoading()
