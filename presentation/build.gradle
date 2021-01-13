@@ -67,6 +67,7 @@ dependencies {
 
     testImplementation(
             junit.junitX,
+            coroutines.test,
             mockk.mockk,
             arch.test
     )

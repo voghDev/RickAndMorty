@@ -2,6 +2,7 @@ package com.juangomez.rickandmorty.views.seasons
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import arrow.core.Either
+import com.juangomez.common.Failure
 import com.juangomez.domain.repositories.EpisodeRepository
 import com.juangomez.domain.usecases.GetSeasonsUseCase
 import com.juangomez.rickandmorty.views.base.BaseViewModel
@@ -24,6 +25,9 @@ class SeasonsViewModelTest {
 
     private val episodeRepository = mockk<EpisodeRepository>()
 
+    private val useCase = GetSeasonsUseCase(episodeRepository)
+    private val viewModel = SeasonsViewModel(useCase)
+
     @Before
     fun setup() {
         Dispatchers.setMain(coroutineDispatcher)
@@ -34,12 +38,18 @@ class SeasonsViewModelTest {
     fun `should show a list of seasons when ViewModel is initialized`() {
         coEvery { episodeRepository.getEpisodes() } returns Either.Right(emptyList())
 
-        val useCase = GetSeasonsUseCase(episodeRepository)
-        val viewModel = SeasonsViewModel(useCase)
-
         viewModel.initialState()
 
         assertTrue(viewModel.state() is SeasonsViewModel.State.SeasonsLoaded)
+    }
+
+    @Test
+    fun `should transact to error state when Repository returns an error`() {
+        coEvery { episodeRepository.getEpisodes() } returns Either.Left(Failure.ServerError)
+
+        viewModel.initialState()
+
+        assertTrue(viewModel.state() is SeasonsViewModel.State.Error)
     }
 
     private fun BaseViewModel.state() = this.state.value
