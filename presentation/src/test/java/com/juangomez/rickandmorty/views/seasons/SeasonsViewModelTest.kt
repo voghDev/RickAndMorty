@@ -10,9 +10,7 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.Assert.assertTrue
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.setMain
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -21,7 +19,9 @@ class SeasonsViewModelTest {
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
-    private val coroutineDispatcher = TestCoroutineDispatcher()
+    @ExperimentalCoroutinesApi
+    @get:Rule
+    val coroutineTestRule = CoroutineTestRule()
 
     private val episodeRepository = mockk<EpisodeRepository>()
 
@@ -29,10 +29,7 @@ class SeasonsViewModelTest {
     private val viewModel = SeasonsViewModel(useCase)
 
     @Before
-    fun setup() {
-        Dispatchers.setMain(coroutineDispatcher)
-        MockKAnnotations.init(this)
-    }
+    fun setup() = MockKAnnotations.init(this)
 
     @Test
     fun `should show a list of seasons when ViewModel is initialized`() {
