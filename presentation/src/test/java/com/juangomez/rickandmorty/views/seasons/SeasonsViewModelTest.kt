@@ -1,13 +1,17 @@
 package com.juangomez.rickandmorty.views.seasons
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.juangomez.domain.usecases.BaseUseCase
+import arrow.core.Either
+import com.juangomez.domain.repositories.EpisodeRepository
 import com.juangomez.domain.usecases.GetSeasonsUseCase
 import com.juangomez.rickandmorty.views.base.BaseViewModel
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.Assert.assertTrue
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -16,20 +20,26 @@ class SeasonsViewModelTest {
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
-    private val mockUseCase = mockk<GetSeasonsUseCase>()
+    private val coroutineDispatcher = TestCoroutineDispatcher()
+
+    private val episodeRepository = mockk<EpisodeRepository>()
 
     @Before
-    fun setup() = MockKAnnotations.init(this)
+    fun setup() {
+        Dispatchers.setMain(coroutineDispatcher)
+        MockKAnnotations.init(this)
+    }
 
     @Test
-    fun `should transact to Loading state when ViewModel is initialized`() {
-        //coEvery { mockUseCase.invoke(any(), BaseUseCase.None()) } returns
+    fun `should show a list of seasons when ViewModel is initialized`() {
+        coEvery { episodeRepository.getEpisodes() } returns Either.Right(emptyList())
 
-        val viewModel = SeasonsViewModel(mockUseCase)
+        val useCase = GetSeasonsUseCase(episodeRepository)
+        val viewModel = SeasonsViewModel(useCase)
 
         viewModel.initialState()
 
-        assertTrue(viewModel.state() is SeasonsViewModel.State.Loading)
+        assertTrue(viewModel.state() is SeasonsViewModel.State.SeasonsLoaded)
     }
 
     private fun BaseViewModel.state() = this.state.value
