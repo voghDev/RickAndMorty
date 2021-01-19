@@ -7,7 +7,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.juangomez.common.Failure
 import com.juangomez.rickandmorty.R
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity<T : BaseViewModel> : AppCompatActivity() {
 
     abstract val layoutId: Int
     abstract val viewModel: BaseViewModel
@@ -22,7 +22,9 @@ abstract class BaseActivity : AppCompatActivity() {
 
     open fun prepare(intent: Intent?) {}
 
-    abstract fun setupObservers()
+    open fun setupObservers() {
+        viewModel.state.observe(this, { manageState(it) })
+    }
 
     abstract fun manageState(state: BaseViewModel.State)
 

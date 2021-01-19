@@ -3,7 +3,6 @@ package com.juangomez.rickandmorty.views.seasons
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.juangomez.domain.models.Season
@@ -15,16 +14,12 @@ import com.juangomez.rickandmorty.common.visible
 import com.juangomez.rickandmorty.views.seasons.adapter.EpisodesAdapter
 import kotlinx.android.synthetic.main.seasons_activity.*
 
-class SeasonsActivity : BaseActivity() {
+class SeasonsActivity : BaseActivity<SeasonsViewModel>() {
 
     override val viewModel: SeasonsViewModel by viewModel()
     override val layoutId: Int = R.layout.seasons_activity
 
     private lateinit var episodesAdapter: EpisodesAdapter
-
-    override fun setupObservers() {
-        viewModel.state.observe(this, Observer { manageState(it) })
-    }
 
     override fun manageState(state: BaseViewModel.State) {
         when (state) {
