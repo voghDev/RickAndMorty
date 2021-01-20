@@ -9,12 +9,10 @@ import com.juangomez.rickandmorty.R
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    abstract val layoutId: Int
     abstract val viewModel: BaseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layoutId)
         setupObservers()
         prepare(intent)
         viewModel.initialState()
