@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <androidx.core.widget.ContentLoadingProgressBar
-        android:id="@+id/progress_bar"
+        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,13 +19,13 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/seasons_content_layout"
+            android:id="@+id/seasonsContentLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone">
 
             <ImageView
-                android:id="@+id/cover_image"
+                android:id="@+id/coverImage"
                 android:layout_width="0dp"
                 android:layout_height="220dp"
                 android:contentDescription="@null"
@@ -36,7 +36,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/summary_text"
+                android:id="@+id/summaryText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
@@ -44,26 +44,26 @@
                 android:text="@string/summary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cover_image" />
+                app:layout_constraintTop_toBottomOf="@+id/coverImage" />
 
             <Spinner
-                android:id="@+id/season_number_text_selector"
+                android:id="@+id/seasonNumberTextSelector"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/summary_text" />
+                app:layout_constraintTop_toBottomOf="@+id/summaryText" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/episodes_list"
+                android:id="@+id/episodesList"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/season_number_text_selector" />
+                app:layout_constraintTop_toBottomOf="@id/seasonNumberTextSelector" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
