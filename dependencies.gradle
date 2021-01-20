@@ -1,5 +1,5 @@
 ext {
-    def androidPluginVersion = '3.5.0'
+    def androidPluginVersion = '4.0.2'
     def mavenPluginVersion = '2.0'
     def kotlinVersion = '1.4.0'
 
