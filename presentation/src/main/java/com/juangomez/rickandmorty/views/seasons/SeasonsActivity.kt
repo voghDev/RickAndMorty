@@ -1,10 +1,8 @@
 package com.juangomez.rickandmorty.views.seasons
 
-import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.juangomez.domain.models.Season
@@ -19,16 +17,11 @@ import com.juangomez.rickandmorty.views.seasons.adapter.EpisodesAdapter
 class SeasonsActivity : BaseActivity() {
 
     override val viewModel: SeasonsViewModel by viewModel()
+    override val binding: SeasonsActivityBinding by lazy {
+        SeasonsActivityBinding.inflate(layoutInflater)
+    }
 
     private lateinit var episodesAdapter: EpisodesAdapter
-    private lateinit var binding: SeasonsActivityBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        binding = SeasonsActivityBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-    }
 
     override fun setupObservers() {
         viewModel.state.observe(this, { manageState(it) })
