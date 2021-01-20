@@ -31,7 +31,7 @@ class SeasonsActivity : BaseActivity() {
     }
 
     override fun setupObservers() {
-        viewModel.state.observe(this, Observer { manageState(it) })
+        viewModel.state.observe(this, { manageState(it) })
     }
 
     override fun manageState(state: BaseViewModel.State) {
