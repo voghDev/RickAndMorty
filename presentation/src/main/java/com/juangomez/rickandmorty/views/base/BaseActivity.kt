@@ -3,18 +3,19 @@ package com.juangomez.rickandmorty.views.base
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewbinding.ViewBinding
 import com.afollestad.materialdialogs.MaterialDialog
 import com.juangomez.common.Failure
 import com.juangomez.rickandmorty.R
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    abstract val layoutId: Int
     abstract val viewModel: BaseViewModel
+    abstract val binding: ViewBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layoutId)
+        setContentView(binding.root)
         setupObservers()
         prepare(intent)
         viewModel.initialState()

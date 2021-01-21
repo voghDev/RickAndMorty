@@ -3,7 +3,6 @@ package com.juangomez.rickandmorty.views.seasons
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.juangomez.domain.models.Season
@@ -12,18 +11,20 @@ import com.juangomez.rickandmorty.views.base.BaseViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import com.juangomez.rickandmorty.R
 import com.juangomez.rickandmorty.common.visible
+import com.juangomez.rickandmorty.databinding.SeasonsActivityBinding
 import com.juangomez.rickandmorty.views.seasons.adapter.EpisodesAdapter
-import kotlinx.android.synthetic.main.seasons_activity.*
 
 class SeasonsActivity : BaseActivity() {
 
     override val viewModel: SeasonsViewModel by viewModel()
-    override val layoutId: Int = R.layout.seasons_activity
+    override val binding: SeasonsActivityBinding by lazy {
+        SeasonsActivityBinding.inflate(layoutInflater)
+    }
 
     private lateinit var episodesAdapter: EpisodesAdapter
 
     override fun setupObservers() {
-        viewModel.state.observe(this, Observer { manageState(it) })
+        viewModel.state.observe(this, { manageState(it) })
     }
 
     override fun manageState(state: BaseViewModel.State) {
@@ -47,14 +48,14 @@ class SeasonsActivity : BaseActivity() {
         }
     }
 
-    private fun showLoading() = progress_bar.visible()
+    private fun showLoading() = binding.progressBar.visible()
 
-    private fun hideLoading() = progress_bar.hide()
+    private fun hideLoading() = binding.progressBar.hide()
 
-    private fun showSeasonsContentLayout() = seasons_content_layout.visible()
+    private fun showSeasonsContentLayout() = binding.seasonsContentLayout.visible()
 
     private fun setupSeasonsSelector(seasons: List<Season>) {
-        season_number_text_selector.apply {
+        binding.seasonNumberTextSelector.apply {
             adapter = ArrayAdapter(
                 this@SeasonsActivity,
                 R.layout.season_row,
@@ -77,7 +78,7 @@ class SeasonsActivity : BaseActivity() {
 
     private fun setupEpisodesList(season: Season) {
         episodesAdapter = EpisodesAdapter(season.episodes)
-        episodes_list.apply {
+        binding.episodesList.apply {
             layoutManager = LinearLayoutManager(this@SeasonsActivity, RecyclerView.VERTICAL, false)
             adapter = episodesAdapter
             isNestedScrollingEnabled = false
