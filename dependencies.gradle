@@ -13,6 +13,7 @@ ext {
     def appCompatVersion = '1.1.0'
     def constraintlayoutVersion = '2.0.1'
     def recyclerviewVersion = '1.1.0'
+    def cardviewVersion = "1.0.0"
     def koinVersion = '2.0.1'
     def lifecycleVersion = '2.2.0'
     def materialDialogsVersion = '3.3.0'
@@ -79,6 +80,7 @@ ext {
             appCompat       : "androidx.appcompat:appcompat:${appCompatVersion}",
             constraintlayout: "androidx.constraintlayout:constraintlayout:${constraintlayoutVersion}",
             recyclerview    : "androidx.recyclerview:recyclerview:${recyclerviewVersion}",
+            cardview           : "androidx.cardview:cardview:${cardviewVersion}",
             lifecycleViewModel : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}",
             ktx                : "androidx.core:core-ktx:${ktxVersion}"
     ]
