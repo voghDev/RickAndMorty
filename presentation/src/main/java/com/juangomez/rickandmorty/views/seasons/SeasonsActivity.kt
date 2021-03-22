@@ -83,6 +83,6 @@ class SeasonsActivity : BaseActivity() {
             adapter = episodesAdapter
             isNestedScrollingEnabled = false
         }
+        binding.seasonInfoView.setup(season.number.toString())
     }
-
 }

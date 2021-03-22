@@ -24,6 +24,14 @@
             android:layout_height="wrap_content"
             android:visibility="gone">
 
+            <com.juangomez.rickandmorty.views.seasons.SeasonInfoView
+                android:id="@+id/seasonInfoView"
+                android:layout_width="0dp"
+                android:layout_height="240dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/coverImage"
                 android:layout_width="0dp"
@@ -33,7 +41,7 @@
                 android:src="@drawable/cover"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/seasonInfoView" />
 
             <TextView
                 android:id="@+id/summaryText"
