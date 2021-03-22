@@ -32,28 +32,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/coverImage"
-                android:layout_width="0dp"
-                android:layout_height="220dp"
-                android:contentDescription="@null"
-                android:scaleType="centerCrop"
-                android:src="@drawable/cover"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/seasonInfoView" />
-
-            <TextView
-                android:id="@+id/summaryText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:gravity="center"
-                android:text="@string/summary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/coverImage" />
-
             <Spinner
                 android:id="@+id/seasonNumberTextSelector"
                 android:layout_width="wrap_content"
@@ -61,7 +39,7 @@
                 android:layout_marginTop="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/summaryText" />
+                app:layout_constraintTop_toBottomOf="@+id/seasonInfoView" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/episodesList"
