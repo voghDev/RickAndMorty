@@ -12,7 +12,7 @@ class EpisodesViewHolder(override val containerView: View) : RecyclerView.ViewHo
 
     @SuppressLint("SetTextI18n")
     fun bind(episode: Episode) {
-        containerView.episode_name_text.text = episode.name
-        containerView.episode_number_text.text = "#${episode.number}"
+        containerView.episodeNameText.text = episode.name
+        containerView.episodeNumberText.text = "#${episode.number}"
     }
 }
