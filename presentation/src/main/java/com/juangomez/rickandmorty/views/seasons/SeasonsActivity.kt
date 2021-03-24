@@ -84,5 +84,4 @@ class SeasonsActivity : BaseActivity() {
             isNestedScrollingEnabled = false
         }
     }
-
 }
