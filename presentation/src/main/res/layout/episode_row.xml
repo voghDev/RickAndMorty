@@ -7,7 +7,7 @@
     android:padding="20dp">
 
     <TextView
-        android:id="@+id/episode_number_text"
+        android:id="@+id/episodeNumberText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
@@ -16,13 +16,13 @@
         tools:text="#1" />
 
     <TextView
-        android:id="@+id/episode_name_text"
+        android:id="@+id/episodeNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        app:layout_constraintBottom_toBottomOf="@id/episode_number_text"
-        app:layout_constraintStart_toEndOf="@+id/episode_number_text"
-        app:layout_constraintTop_toTopOf="@id/episode_number_text"
+        app:layout_constraintBottom_toBottomOf="@id/episodeNumberText"
+        app:layout_constraintStart_toEndOf="@+id/episodeNumberText"
+        app:layout_constraintTop_toTopOf="@id/episodeNumberText"
         tools:text="The Old Man and the Seat" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
