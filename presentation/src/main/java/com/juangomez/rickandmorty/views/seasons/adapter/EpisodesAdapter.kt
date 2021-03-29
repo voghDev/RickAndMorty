@@ -10,11 +10,9 @@ import com.juangomez.rickandmorty.views.seasons.adapter.viewholder.EpisodesViewH
 class EpisodesAdapter(private val episodes: List<Episode>) :
     RecyclerView.Adapter<EpisodesViewHolder>() {
 
-    private lateinit var binding: EpisodeRowBinding
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodesViewHolder {
-        binding = EpisodeRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return EpisodesViewHolder(binding.root, binding)
+        val binding = EpisodeRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return EpisodesViewHolder(binding.root)
     }
 
     override fun onBindViewHolder(holder: EpisodesViewHolder, position: Int) =
