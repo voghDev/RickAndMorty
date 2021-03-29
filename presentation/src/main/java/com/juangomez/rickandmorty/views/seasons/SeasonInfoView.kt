@@ -13,9 +13,8 @@ class SeasonInfoView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    private val binding: SeasonInfoViewBinding by lazy {
+    private val binding: SeasonInfoViewBinding =
         SeasonInfoViewBinding.inflate(LayoutInflater.from(context), this, true)
-    }
 
     fun setup(text: String) {
         binding.coverImage.setImageResource(R.drawable.cover)
