@@ -20,8 +20,6 @@ class SeasonsViewModel(private val getSeasonsUseCase: GetSeasonsUseCase) : BaseV
         GET_SEASONS
     }
 
-    private lateinit var seasons: List<Season>
-
     override fun initialState() {
         viewState.value = State.Loading
     }
@@ -48,7 +46,6 @@ class SeasonsViewModel(private val getSeasonsUseCase: GetSeasonsUseCase) : BaseV
     }
 
     private fun handleGetSeasonsSuccess(seasons: List<Season>) {
-        this.seasons = seasons
         viewState.value = State.SeasonsLoaded(seasons)
     }
 }
