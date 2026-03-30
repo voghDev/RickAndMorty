@@ -45,6 +45,7 @@ dependencies {
             support.appCompat,
             support.constraintlayout,
             support.recyclerview,
+            support.cardview,
             support.lifecycleViewModel,
             support.ktx,
             retrofit.gson,
